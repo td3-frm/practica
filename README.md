@@ -1,9 +1,8 @@
-# Técnicas Digitales III
-===
+# Técnicas Digitales III, UTN-FRM
 
 Archivos de la parte práctica de la cátedra de Técnicas Digitales III, Universidad Tecnológica Nacional, Facultad Regional Mendoza, Argentina.
 
-## Horarios de consulta.
+## Horarios de consulta
 
 * Teoría: lunes de 18 a 19 hs. 
 
