@@ -1,5 +1,5 @@
 /*
- * Ejercicio 1 y 2 de la guia de TP Señales
+ * Ejercicio 1 y 2 de TP Señales
 */
 
 #include <stdio.h>
@@ -10,7 +10,8 @@
 #include <signal.h>
 
 
-int main (){
+int main ()
+{
 
    sleep(5);
    

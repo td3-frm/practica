@@ -1,5 +1,5 @@
 /*
- * Ejercicios 3 y 4 de la guia de TP Seniales
+ * Ejercicios 3 y 4 de TP Seniales
 */
 
 #include <stdio.h>
@@ -14,11 +14,11 @@ void manejador_senial(int a){
    
 }
 */
-int main (){
+int main ()
+{
 
    signal(SIGKILL, SIG_IGN);
-   //signal(SIGSTOP, SIG_IGN);
-   //signal(SIGTSTP, SIG_IGN);  //Ctrl + Z
+   //signal(SIGTSTP, SIG_IGN);  //Ctrl + z
    
    printf("Proceso PID = %d\n", getpid());   
    
