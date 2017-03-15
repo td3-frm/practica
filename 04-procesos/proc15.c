@@ -1,10 +1,10 @@
 /*
- * Ejercicio 15 de la guía práctica Procesos
+ * Ejercicio 15 de TP Procesos
 */
-#include <unistd.h>
 #include <stdio.h>
-#include <sys/types.h>
-#include <wait.h>
+#include <stdlib.h>
+#include <sys/types.h>    // Define pid_t
+#include <unistd.h>       // Define fork, getpid y getppid
 
 int main(void) {
 	
@@ -16,7 +16,7 @@ int main(void) {
 	if (err == -1)
 		printf("Este printf se ejecuta en caso de error. Por que?\n");
 			
-	return (0);
+	exit(0);
 
 }
 

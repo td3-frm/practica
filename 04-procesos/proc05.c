@@ -1,10 +1,10 @@
 /*
- * Ejercicio 5 de la guía práctica Procesos
+ * Ejercicio 5 de TP Procesos
 */
 #include <stdio.h>
-#include <sys/types.h>
-#include <unistd.h>
-#include <signal.h>
+#include <stdlib.h>
+#include <sys/types.h>    // Define pid_t
+#include <unistd.h>       // Define fork, getpid y getppid
 
 int main ()
 {
@@ -25,6 +25,6 @@ int main ()
 		default:  //proceso padre
 			printf ("Soy el proceso padre, pid: %d , x = %d\n", getpid(), ++x);
 	}
-    return 0;
+    exit(0);
 
 }

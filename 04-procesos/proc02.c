@@ -1,10 +1,10 @@
 /*
- * Ejercicio 2 de la guía práctica Procesos
+ * Ejercicio 2 de TP Procesos
 */
 #include <stdio.h>
+#include <stdlib.h>
 #include <sys/types.h>    // Define pid_t
 #include <unistd.h>       // Define fork, getpid y getppid
-#include <signal.h>
 
 int main (){
 
@@ -17,5 +17,6 @@ int main (){
 	// Ejecute pstree en otra consola	
 	sleep(30); 
 	
-	return 0;
+	exit(0);
+	
 }
