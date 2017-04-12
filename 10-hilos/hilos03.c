@@ -1,5 +1,5 @@
 /*  
- * Ejercicio 3 de la guía práctica Hilos
+ * Ejercicio 3 del TP Hilos
  *   
  */
 #include <pthread.h>
@@ -9,24 +9,25 @@
 
 pthread_t hilo[2];
 
-void * hilo1 ()
+void * hilo1()
 {
-//  pthread_detach(pthread_self());      
+  //pthread_detach(pthread_self());      
   printf ("Yo soy el hilo 1 \n");
   sleep(2);  
   pthread_exit (NULL);
 }
 
-void * hilo2 ()
+void * hilo2()
 {
   printf ("Yo soy el hilo 2 \n");
   printf("Esperando al hilo %lx \n", hilo[0]);
+  
   pthread_join(hilo[0],NULL);
   printf("Terminando hilo 2 \n");
   pthread_exit (NULL);
 }
 
-int main (int argc, char *argv[])
+int main()
 {
   int rc;
   
@@ -48,7 +49,6 @@ int main (int argc, char *argv[])
     }    
   printf ("El main creando el hilo hola2, nro %lx\n",hilo[1]);
   
-  //pthread_join(hilo[0],NULL);
   pthread_join(hilo[1],NULL);
   printf ("Se ejecutaron todos los hilos\n");
   

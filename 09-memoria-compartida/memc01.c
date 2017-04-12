@@ -1,5 +1,5 @@
 /*  
- * Ejercicio 1 de la guía práctica Memoria compartida
+ * Ejercicio 1 del TP Memoria compartida
  * Tipica implementacion de una memoria compartida
  */
 #include <string.h>
@@ -25,14 +25,14 @@ struct stat sb;
 //--- Crea la memoria compartida, y obtiene el descriptor
    fd = shm_open(MEM_COM , O_RDWR|O_CREAT, 0777 );
    if (fd == -1){
-       printf("Error en shm_open, %d,\n", fd);
+       printf("\nError en shm_open\n");
        exit(-1); }
 
 //--- Se dimensiona la memoria y se pone a cero
    largo = 1024;   
    error = ftruncate(fd, largo);
    if (error == -1){
-       printf("Error en ftruncate\n", error);
+       printf("\nError en ftruncate\n");
        exit(-1); }
 
 
@@ -40,7 +40,7 @@ struct stat sb;
  //    Devuelve un puntero al área reservada
    ptr = mmap(NULL, 10, PROT_READ |PROT_WRITE, MAP_SHARED, fd, 0 );
    if (ptr == (void *)-1){
-       printf("Error en mmap\n", ptr);
+       printf("\nError en mmap\n");
        exit(-1); }
 
     printf ("Direccion de memoria local donde arranca la memoria %p\n", ptr);   
@@ -60,24 +60,39 @@ struct stat sb;
 
 //--- Lee el estado de la memoria y se guarda en la estructura sb
 //     el tamaño del archivo es el campo st_size
-    error = fstat(fd, &sb);
-    if (error == -1){
-       printf("Error en fstat\n", error);
+	error = fstat(fd, &sb);
+	if (error == -1){
+       printf("\nError en fstat\n");
        exit(-1); }
        
 //-- Copia  de la memoria compartida en buff
-//   memcpy(buff, ptr, sb.st_size);
-//   printf("\nLeido: %s", buff);    
+	memcpy(buff, ptr, sb.st_size);
+	printf("\nLeido de memoria compartida: %s", buff);    
+
+
+///////////// vuelve a leer ////////////////////////////////
+//--- Lee el estado de la memoria y se guarda en la estructura sb
+//     el tamaño del archivo es el campo st_size
+	error = fstat(fd, &sb);
+	if (error == -1){
+       printf("\nError en fstat\n");
+       exit(-1); }
+
 
 //-- Lee de la memoria compartida y se imprime por pantalla
+	write (0,"\nLeido por segunda vez de la memoria: ",sizeof("\nLeido por segunda vez de la memoria: "));
     largo=write(STDOUT_FILENO, ptr, sb.st_size);
+
 
 /*
 //--- Borrar memoria compartida   
     error = shm_unlink(MEM_COM);
     if (error == -1){
-       printf("Error en shm_unlink\n", error);
+       printf("\nError en shm_unlink\n");
        exit(-1); }
+	
+	printf("\nObjeto de memoria borrado\n");
+
  */
  
     exit(0);

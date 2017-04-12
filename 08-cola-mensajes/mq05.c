@@ -73,14 +73,14 @@ int main() {
     mqd = mq_open(MQ_PATH, O_RDWR | O_CREAT | O_NONBLOCK, 0666, &attr);
    if (mqd < 0) {
       printf ("error en mq_open()");   
-      exit(0);  }
+      exit(-1);  }
 
    printf("Cola de mensajes creada\n");
 
  
   if (mq_getattr(mqd, &attr_rcv) == -1) {
       printf ("error en mq_getattr()");
-      exit(0); }
+      exit(-1); }
    printf("Nro max. de mensajes en cola de mensajes: %ld\n", attr_rcv.mq_maxmsg);
    printf("Longitud max. de mensaje: %ld\n", attr_rcv.mq_msgsize);
    printf("Nros de mensajes pendientes en cola de mensajes: %ld\n", attr_rcv.mq_curmsgs);
@@ -91,5 +91,5 @@ int main() {
        
    }  //fin while
 
-   return 0;
+   exit(0);
 }

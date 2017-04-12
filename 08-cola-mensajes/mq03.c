@@ -29,17 +29,19 @@ int main() {
    struct mq_attr attr, attr_rcv;
    
    signal(SIGUSR1, sig_user1);
-   
+
+   printf ("Mi pid es %d\n", getpid());
+
    mqd = mq_open(MQ_PATH, O_RDONLY, 0666, &attr); 
    if (mqd < 0) {
       printf ("error en mq_open()");
-      return -1;  }
+      exit(-1);  }
 
    printf("Cola de mensajes creada\n");
 
    if (mq_getattr(mqd, &attr_rcv) == -1){
       printf ("error en mq_getattr()");
-      return -1; }
+      exit(-1); }
 
    printf("Nro max. de mensajes en cola de mensajes: %ld\n", attr_rcv.mq_maxmsg);
    printf("Longitud max. de mensaje: %ld\n", attr_rcv.mq_msgsize);
@@ -51,11 +53,11 @@ int main() {
       leido = mq_receive(mqd, buff, attr.mq_msgsize, 0);
       if (( leido < 0 )){
          printf ("error en mq_receive()");
-         return -1; }
+         exit(-1); }
 
       printf("Mensaje leido: %s\n", buff);
 
    }
    
-   return 0;
+   exit(0);
 }

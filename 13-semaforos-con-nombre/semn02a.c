@@ -1,3 +1,5 @@
+/* Ejercicio 2 programa 1 del TP de semaforos con nombre */
+
 #include <string.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -49,7 +51,7 @@ char nroascii ;
 	printf("Memoria mapeada en: %p\n", ptr);
 
 	contador = 0x41; // Se inicializa en 0 ASCII
-	for(i = 0 ; i < 26 ; i++)     {
+	for(i = 0 ; i < 10 ; i++)     {
 		nroascii = contador;            
 		contador = contador+1;
 		memcpy((ptr+ i), &nroascii, sizeof(nroascii));

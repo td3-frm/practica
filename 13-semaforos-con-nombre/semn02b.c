@@ -1,3 +1,5 @@
+/* Ejercicio 2 programa 2 del TP de semaforos con nombre */
+
 #include <string.h>
 #include <stdio.h>
 #include <pthread.h>    
@@ -39,15 +41,15 @@ struct stat sb;
 		
 //--- Lee el estado de la memoria y se guarda en la estructura sb
 //     el tamaño del archivo es el campo st_size
-		error = fstat(fd, &sb);
-		if (error == -1){
-			printf("Error en fstat %d \n", error);
-			exit(-1); }
+	error = fstat(fd, &sb);
+	if (error == -1){
+		printf("Error en fstat %d \n", error);
+		exit(-1); }
 
 //-- Lee de la memoria compartida y se imprime por pantalla
-		write (STDOUT_FILENO, "\nLeido de memoria: ", sizeof("\nLeido de memoria: "));
-		largo=write(STDOUT_FILENO, ptr, sb.st_size);
-		write (STDOUT_FILENO, "\n", sizeof("\n"));
+	write (STDOUT_FILENO, "\nLeido de memoria: ", sizeof("\nLeido de memoria: "));
+	largo=write(STDOUT_FILENO, ptr, sb.st_size);
+	write (STDOUT_FILENO, "\n", sizeof("\n"));
         			
 	exit(0);
 

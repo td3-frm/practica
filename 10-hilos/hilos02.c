@@ -1,5 +1,5 @@
 /*  
- * Ejercicio 2 de la guía práctica Hilos
+ * Ejercicio 2 del TP Hilos
  *
  */
 
@@ -8,18 +8,18 @@
 #include <unistd.h>
 #include <stdlib.h>
 
+int t = 0 ;
+int arre[5]={0};
+
 void *hola(void * nro) {
    sleep(2);
    printf("Hola, soy el hilo %d\n", * (int*) nro);
    pthread_exit(NULL);
 }
 
-int main(int argc, char *argv[]) {
-
+int main() {
 pthread_t hilo[5];
 int rc;
-int t = 0 ;
-int arre[5]={0};
 
   for(t=0; t < 5 ; t++){
 

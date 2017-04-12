@@ -1,5 +1,5 @@
 /*
- * Ejercicio 4 de la guía práctica Tuberías
+ * Ejercicio 4 de TP PIPE
 */
 #include <stdio.h>
 #include <sys/types.h>
@@ -13,7 +13,7 @@
 
 void pipe_sign_handler(int a){
 	
-	printf("\nProblema con pipeline.\n");
+	write (0, "\n Problema con pipeline.\n ", sizeof("\n Problema con pipeline.\n"));
 	exit(-1);
 }
 
@@ -33,23 +33,24 @@ int main (){
 	switch (fork()){ 
 		
 		case 0:
-			//close(ipc[0]);
+			close(ipc[1]);
 			printf("Leyendo tuberia... \n");
 			leido = read(ipc[0], buff, sizeof(buff));
-
-			write (0, "Leido de la tuberia ", sizeof("\nLeido de la tuberia"));
-			write (0, buff, leido-1);
-			printf(", por el proceso hijo, pid %d \n", getpid());
-			exit(0);		
+			if(leido < 1){
+				write (0, "\nError al leer tuberia", sizeof("\nError al leer tuberia"));
+			}else {
+				write (0, "Leido de la tuberia ", sizeof("\nLeido de la tuberia"));
+				write (0, buff, leido-1);
+				printf(", por el proceso hijo, pid %d \n", getpid());
+			}
+			exit(0);
 			
 		default:
-			//close(ipc[0]);
-			strncpy(buff, DATA, sizeof(DATA)); 
+			strncpy(buff, DATA, sizeof(DATA));
 			write(ipc[1], buff, sizeof(DATA));
-			//exit(0);
 		
 			wait(NULL);		
 			
-			return 0;		
+			exit(0);		
 	}
 }

@@ -1,4 +1,7 @@
-/* consumidor */
+/* Ejercicio 3 programa 2 del TP de semaforos con nombre */
+
+/*------- Consumidor ------------*/
+
 
 #include <string.h>
 #include <stdio.h>
@@ -56,7 +59,7 @@ int dato, i, pos, s;
 	printf("Objeto de memoria creado\n");
 
  //--- Se mapea la memoria compartida al espacio de memoria del proceso
- //    Devuelve un puntero al área reservada
+ //    Devuelve un puntero al area reservada
 	ptr = mmap(NULL, 10, PROT_READ |PROT_WRITE, MAP_SHARED, fd, 0 );
 	if (ptr == (void *)-1){
 		printf("Error en mmap %p\n", ptr);

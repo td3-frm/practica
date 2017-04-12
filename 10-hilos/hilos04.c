@@ -1,5 +1,5 @@
 /*  
- * Ejercicio 4 de la guía práctica Hilos
+ * Ejercicio 4 del TP Hilos
  *   
  */
 #include <pthread.h>
@@ -24,7 +24,7 @@ void *hilo1 (void * nro)
    pthread_exit(NULL);
 }
 
-int main(int argc, char *argv[])
+int main()
 {
    pthread_t hilo[100];
    int rc, t, arre[100];

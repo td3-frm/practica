@@ -1,5 +1,5 @@
 /*  
- * Ejercicio de la guía práctica Memoria compartida
+ * Ejercicio 3 del TP Memoria compartida
  * 
  */
 #include <string.h>
@@ -26,7 +26,7 @@ struct stat sb;
 //--- Crea la memoria compartida, y obtiene el descriptor
    fd = shm_open(MEM_COM , O_RDWR|O_CREAT, 0777 );
    if (fd == -1){
-          printf("Error en shm_open, %d,\n", fd);
+          printf("\nError en shm_open\n");
           exit(-1); }
 
 
@@ -36,9 +36,9 @@ struct stat sb;
 
     //--- Se mapea la memoria compartida al espacio de memoria del proceso
     //    Devuelve un puntero al área reservada
-      ptr = mmap(NULL, 10, PROT_READ |PROT_WRITE, MAP_SHARED, fd, 0 );
+      ptr = mmap(NULL, 10, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0 );
       if (ptr == (void *)-1){
-             printf("Error en mmap\n", ptr);
+             printf("\nError en mmap\n");
              exit(-1); }
    
        printf ("Proceso hijo, direccion del puntero %p\n", ptr);   
@@ -58,7 +58,7 @@ struct stat sb;
     //    Devuelve un puntero al área reservada
       ptr = mmap(NULL, 10, PROT_READ |PROT_WRITE, MAP_SHARED, fd, 0 );
       if (ptr == (void *)-1){
-          printf("Error en mmap\n", ptr);
+          printf("\nError en mmap\n");
           exit(-1); }
 
       printf ("Proceso padre, direccion del puntero %p\n", ptr);   
@@ -75,7 +75,7 @@ struct stat sb;
 //--- Borrar memoria compartida   
        error = shm_unlink(MEM_COM);
        if (error == -1){
-          printf("Error en shm_unlink\n", error);
+          printf("\nError en shm_unlink\n");
           exit(-1); }
    }
 

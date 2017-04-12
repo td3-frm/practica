@@ -1,4 +1,6 @@
-/* productor */
+/* Ejercicio 3 programa 1 del TP de semaforos con nombre */
+
+/*------- Productor ------------*/
 
 #include <string.h>
 #include <stdio.h>
@@ -33,7 +35,7 @@ int main() {
 	if (error == -1){
 		printf("El objeto de memoria no existe\n"); }
 
-//------Se elimina semáforo por si ya existe
+//------Se elimina semaforo por si ya existe
 	s=sem_unlink(sema_lugar);
 	if (s == -1){
 		printf("El semaforo no existe\n"); }
@@ -69,14 +71,14 @@ int main() {
 	printf("Objeto de memoria creado\n");
 
 //--- Se dimensiona la memoria y se pone a cero
-   largo = 1024;   
-   error = ftruncate(fd, largo);
-   if (error == -1){
-       printf("Error en ftruncate\n", error);
-       return -1; }
+	largo = 1024;   
+	error = ftruncate(fd, largo);
+	if (error == -1){
+		printf("Error en ftruncate\n", error);
+		exit(-1); }
 
  //--- Se mapea la memoria compartida al espacio de memoria del proceso
- //    Devuelve un puntero al área reservada
+ //    Devuelve un puntero al area reservada
 	ptr = mmap(NULL, 10, PROT_READ |PROT_WRITE, MAP_SHARED, fd, 0 );
 	if (ptr == (void *)-1){
 		printf("Error en mmap %p\n", ptr);
@@ -89,8 +91,8 @@ int main() {
 	contador = 1000; 
 
 	for(i=0; i < DATOS_A_PRODUCIR; i++ ) {
-		s = sem_wait(sem_lugar);            // Decrementa sem_lugar o esperar si igual a 0
 
+		s = sem_wait(sem_lugar);            // Decrementa sem_lugar o esperar si igual a 0
 		if (s != 0) {
 			printf("ERROR; sem_wait() = %d\n", s);
 			exit(-1);	      }

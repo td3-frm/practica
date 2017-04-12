@@ -1,9 +1,11 @@
 /*
- * Ejercicio 1 de la guía práctica Tuberías
+ * Ejercicio 1 de TP PIPE
 */
 #include <stdio.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include <string.h>
+#include <stdlib.h>
 
 int main (){
 
@@ -23,12 +25,17 @@ int main (){
 		close(ipc[1]);
 		
 		leido = read(ipc[0], buff, sizeof(buff));
-				
-		// Escribir en consola
-		write (0, "\nLeido de la tuberia ", sizeof("\nLeido de la tuberia"));
-		write (0, buff, leido-1);
-		printf(", por el proceso hijo, pid %d \n", getpid());
-		return 0;
+		if(leido < 1){
+			write (0, "\nError al leer tuberia", sizeof("\nError al leer tuberia"));
+		}else {
+			
+			// Escribir en consola
+			write (0, "\nLeido de la tuberia: ", sizeof("\nLeido de la tuberia: "));
+			write (0, buff, leido-1);
+			printf(", por el proceso hijo, pid %d \n", getpid());
+		}
+		exit(0);
+	
 	}
 	// Se cierra el lado de lectura del padre
 	close(ipc[0]);
@@ -44,7 +51,10 @@ int main (){
 	close(ipc[1]);
 
 	wait(NULL);	
-	printf("\nEscrito en la tuberia: %s, por el proceso padre, pid %d \n", buff, getpid());
-	return 0;
+	write (0, "\nEscrito en la tuberia: ", sizeof("\nEscrito en la tuberia: "));
+	write (0, buff, leido-1);
+	printf(", por el proceso padre, pid %d \n", getpid());
+
+	exit(0);
 
 }

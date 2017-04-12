@@ -1,5 +1,5 @@
 /*
- * Ejercicio 3 de la guía práctica Tuberías
+ * Ejercicio 3 de TP PIPE
 */
 #include <stdio.h>
 #include <sys/types.h>
@@ -14,7 +14,7 @@
 
 void pipe_sign_handler(int a){
 	
-	printf("\nProblema con pipeline.\n");
+	write (0, "\n Problema con pipeline.\n ", sizeof("\n Problema con pipeline.\n"));
 }
 
 int main (){
@@ -50,15 +50,19 @@ int main (){
 				int i;
 				for(i=0; i<2; i++){
 					leido = read(ipc[0], buff, sizeof(buff));
-					write (0, "Leido de la tuberia ", sizeof("\nLeido de la tuberia"));
-					write (0, buff, leido-1);
-					printf(", por el proceso padre, pid %d \n", getpid());
-				}					
+					if(leido < 1){
+						write (0, "\nError al leer tuberia", sizeof("\nError al leer tuberia"));
+					}else {
+						write (0, "Leido de la tuberia ", sizeof("\nLeido de la tuberia"));
+						write (0, buff, leido-1);
+						printf(", por el proceso padre, pid %d \n", getpid());
+					}
+				}
 				
 				close(ipc[0]);	
 				wait(NULL);	
 				wait(NULL);					
-				return 0;
+				exit(0);
 			break;
 		}
 	}	

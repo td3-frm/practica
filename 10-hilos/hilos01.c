@@ -1,5 +1,5 @@
 /*  
- * Ejercicio 1 de la guía práctica Hilos
+ * Ejercicio 1 del TP Hilos
  *
  */
 
@@ -14,7 +14,7 @@ void *hola(void * nro) {
    pthread_exit(NULL);
 }
 
-int main(int argc, char *argv[]) {
+int main() {
 
 pthread_t hilo[1];
 int rc,t;

@@ -1,3 +1,5 @@
+/* Ejercicio 4 del TP de semaforos sin nombre */
+
 /* productor-consumidor con semaforos */
 
 #include <stdio.h>
@@ -16,38 +18,39 @@ static int buffer[MAX_BUFFER] = {0};   // Buffer comun
 pthread_t th1, th2;      	// Hilos
 sem_t sem_dato,sem_lugar;   // Semaforos
 
+
 //---------------- PRODUCTOR ---------------------------
-void Productor(void) {     
+
+void Productor(void) {
 int dato, i, pos, s;
 int sem_val1, sem_val2;
 
 	pos = 0;
 	dato = 1000;                     // Producir dato
-   
+	
 	for(i=0; i < DATOS_A_PRODUCIR; i++ ) {
 		s = sem_wait(&sem_lugar);            // Decrementa sem_lugar o esperar si igual a 0
 		if (s != 0) {
 			printf("ERROR; sem_wait() = %d\n", s);
 			exit(-1);	      }
-
+		
 		sleep(1);
-
+		
 		dato++;
 		buffer[pos] = dato;      
 		pos = (pos + 1);
-
+		
 		if (pos >= MAX_BUFFER) {
 			pos=0;   }
-
+		
 		s=sem_post(&sem_dato);      // Incrementa sem_dato   
 		if (s != 0) {
-	      printf("ERROR sem_post()\n");
-	      exit(-1);     }
-
+			printf("ERROR sem_post()\n");
+			exit(-1);     }
+		
 		printf("Productor dato: %d \n", dato);
-
 	}
-   
+	
 	printf("Termina Productor: %d\n",i);
 	pthread_exit(0);
 
@@ -102,7 +105,7 @@ int s;
 		exit(-1);     }
 
 	s=sem_init(&sem_dato, 0, 0);
-	if (s <0) {
+	if (s != 0) {
 		printf("ERROR sem_init()\n");
 		exit(-1);     }
 

@@ -1,5 +1,5 @@
 /*
- * Ejercicio 2 de la guía práctica Tuberías
+ * Ejercicio 2 de TP PIPE
  * 
 */
 #include <stdio.h>
@@ -31,14 +31,16 @@ int main (){
 		default:
 			printf("Leyendo tuberia... \n");
 			leido = read(ipc[0], buff, sizeof(buff));
+			if(leido < 1){
+				write (0, "\nError al leer tuberia", sizeof("\nError al leer tuberia"));
+			}else {
 
-			write (0, "Leido de la tuberia ", sizeof("\nLeido de la tuberia"));
-			write (0, buff, leido-1);
-			printf(", por el proceso padre, pid %d \n", getpid());
-		
+				write (0, "Leido de la tuberia ", sizeof("\nLeido de la tuberia"));
+				write (0, buff, leido-1);
+				printf(", por el proceso padre, pid %d \n", getpid());
+			}		
 			wait(NULL);	
 			
-			
-			return 0;		
+			exit(0);		
 	}
 }
