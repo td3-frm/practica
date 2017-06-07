@@ -1,4 +1,5 @@
-% iir_matlab_to_C: script to compare IIR filters implemented in C and MATLAB languages.
+% iir_matlab_to_C: script to compare IIR filters implemented in C and MATLAB 
+% languages.
 %
 % Version: 001
 % Date:    2016/11/10
@@ -26,7 +27,7 @@ x1 = sin (2 * pi * Fn1 * t);
 Fn2 = 10000;              % Signal freq.
 x2 = sin (2 * pi * Fn2 * t);
 
-signal = x1 + 0.5 * x2;
+signal = x1 + 0.1 * x2;
  
 %% NOISE
 
@@ -44,9 +45,9 @@ Hd = iir_elliptic_3400_44100;
 
 gain_f  = single(Hd.ScaleValues);
 coeff_f = single(Hd.sosMatrix)';
-input_f = single(signal_n);
+signal_f = single(signal_n);
 
-output_c = iir_matlab_wrapper( input_f , coeff_f , gain_f );
+output_c = iir_matlab_wrapper( signal_f , coeff_f , gain_f );
 
 %% IIR MATLAB FILTERING, DOUBLE PRECISION
 
@@ -60,7 +61,7 @@ output_m = filtfilt(SOS, G, signal_n);
 figure
 plot(t, x1, '--k')
 hold on
-plot(t, input_f, 'b')
+plot(t, signal_f, 'b')
 hold on
 plot(t, output_c, 'r')
 hold on

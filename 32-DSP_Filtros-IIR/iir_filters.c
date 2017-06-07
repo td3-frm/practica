@@ -47,6 +47,11 @@
 
 /*****************************************************************************/
 /* iir_filter_I_float()                                                      */
+/*---------------------------------------------------------------------------*/
+/* iir_filter_II_float()                                                     */
+/*---------------------------------------------------------------------------*/
+/*                                                                           */
+/*                                                                           */
 /*****************************************************************************/
 
 void iir_filter_I_float(const float * input, const float * coeff,  const float * gain, const unsigned int N, float * output)
@@ -67,9 +72,6 @@ void iir_filter_I_float(const float * input, const float * coeff,  const float *
     }
 }
 
-/*****************************************************************************/
-/* iir_filter_II_float()                                                     */
-/*****************************************************************************/
 void iir_filter_II_float(const float * input, const float * coeff,  const float * gain, const unsigned int N, float * output)
 {
     unsigned int i;
@@ -128,11 +130,11 @@ float second_order_IIR_direct_form_I_float(const float input, const float * coef
     
     x[0] = input * gain[0]; /* Copy input to x[0] */
     
-    temp =  ( (float) *(coeff + B0) * x[0]) ;   /* B0 * x(n)     */
-    temp += ( (float) *(coeff + B1) * x[1]);    /* B1 * x(n-1) */
-    temp += ( (float) *(coeff + B2) * x[2]);    /* B2 * x(n-2)   */
-    temp -= ( (float) *(coeff + A1) * y[1]);    /* A1 * y(n-1) */
-    temp -= ( (float) *(coeff + A2) * y[2]);    /* A2 * y(n-2)   */
+    temp =  ( (float) *(coeff + B0) * x[0]) ;   /* B0 * x(n)    */
+    temp += ( (float) *(coeff + B1) * x[1]);    /* B1 * x(n-1) 	*/
+    temp += ( (float) *(coeff + B2) * x[2]);    /* B2 * x(n-2)  */
+    temp -= ( (float) *(coeff + A1) * y[1]);    /* A1 * y(n-1) 	*/
+    temp -= ( (float) *(coeff + A2) * y[2]);    /* A2 * y(n-2)  */
     
     y[0] = temp * gain[1];
     
@@ -145,6 +147,42 @@ float second_order_IIR_direct_form_I_float(const float input, const float * coef
     x[1] = x[0];   /* x(n-1) = x(n)   */
     
     return ( temp );
+}
+
+/*****************************************************************************/
+/* Fixed-point version                                                       */
+/*****************************************************************************/
+
+signed int second_order_IIR_direct_form_I( const signed int * coefficients, signed int input)
+{
+    long temp;
+    static signed int x[3] = { 0, 0, 0 };  /* x(n), x(n-1), x(n-2). Must be static */
+    static signed int y[3] = { 0, 0, 0 };  /* y(n), y(n-1), y(n-2). Must be static */
+    
+    x[0] = input; /* Copy input to x[0] */
+    
+    temp =  ( (long) coefficients[B0] * x[0]) ;   /* B0 * x(n)     */
+    temp += ( (long) coefficients[B1] * x[1]);    /* B1/2 * x(n-1) */
+    temp += ( (long) coefficients[B1] * x[1]);    /* B1/2 * x(n-1) */
+    temp += ( (long) coefficients[B2] * x[2]);    /* B2 * x(n-2)   */
+    temp -= ( (long) coefficients[A1] * y[1]);    /* A1/2 * y(n-1) */
+    temp -= ( (long) coefficients[A1] * y[1]);    /* A1/2 * y(n-1) */
+    temp -= ( (long) coefficients[A2] * y[2]);    /* A2 * y(n-2)   */
+    
+    /* Divide temp by coefficients[A0] to remove fractional part */
+    temp >>= 15;
+    
+    y[0] = (short int) ( temp );
+    
+    /* Shuffle values along one place for next time */
+    
+    y[2] = y[1];   /* y(n-2) = y(n-1) */
+    y[1] = y[0];   /* y(n-1) = y(n)   */
+    
+    x[2] = x[1];   /* x(n-2) = x(n-1) */
+    x[1] = x[0];   /* x(n-1) = x(n)   */
+    
+    return ( (short int) temp );
 }
 
 /*****************************************************************************/
@@ -174,7 +212,7 @@ float second_order_IIR_direct_form_II_float ( const float input, const float * c
     
     temp =  ( coeff[A0] * delay[0] );
     
-    temp -= ( coeff[A1] * delay[1] ); 
+    temp -= ( coeff[A1] * delay[1] );  /* A1 */
     
     temp -= ( coeff[A2] * delay[2] );
     
@@ -183,7 +221,7 @@ float second_order_IIR_direct_form_II_float ( const float input, const float * c
     /* Process numerator coefficients */
     temp =  (coeff[B0] * delay[0] );
     
-    temp += (coeff[B1] * delay[1] ) ;  
+    temp += (coeff[B1] * delay[1] ) ;  /* B1 */
     
     temp += (coeff[B2] * delay[2] ) ;
     
@@ -194,3 +232,43 @@ float second_order_IIR_direct_form_II_float ( const float input, const float * c
     return ( temp * gain[1] );
 }
 
+/*****************************************************************************/
+/* Fixed-point version                                                       */
+/*****************************************************************************/
+
+signed int second_order_IIR_direct_form_II ( const signed int * coefficients, signed int input)
+{
+    long temp;
+    static short int delay[3] = { 0 };
+    
+    /* Copy input to temp for temporary storage */
+    
+    temp = (long) input;
+    
+    /* Process denominator coefficients */
+    
+    delay[0] = (signed int) temp;
+    
+    temp = (( (long) coefficients[A0] * delay[0] ) >> 7); /* Divide by 128 */
+    
+    temp -= ( (long) coefficients[A1] * delay[1] );  /* A1 */
+    
+    temp -= ( (long) coefficients[A2] * delay[2] );
+    
+    delay[0] = ( signed int ) temp;
+    
+    /* Process numerator coefficients */
+    
+    temp = ((long) coefficients[B0] * delay[0] );
+    
+    temp += ((long) coefficients[B1] * delay[1] ) ;  /* B1 */
+    
+    temp += ((long) coefficients[B2] * delay[2] ) ;
+    
+    delay[2] = delay[1];
+    delay[1] = delay[0];
+    
+    /* Temp will be fed into input of filter next time through */
+    
+    return ( (short int) temp );
+}
