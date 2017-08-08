@@ -10,7 +10,7 @@ function Hd = iir_elliptic_3400_44100
 % All frequency values are in Hz.
 Fs = 44100;  % Sampling Frequency
 
-N     = 2;     % Order
+N     = 9;     % Order
 Fpass = 3400;  % Passband Frequency
 Apass = 0.5;     % Passband Ripple (dB)
 Astop = 60;    % Stopband Attenuation (dB)

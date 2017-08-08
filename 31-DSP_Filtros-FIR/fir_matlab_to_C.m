@@ -13,7 +13,7 @@ clear
 %% PARAMETERS
 
 Fn1 = 500;   % Signal 1 frequency
-Fn2 = 60;   % Signal 1 frequency
+Fn2 = 50;   % Signal 2 frequency, noise
 Fs = 10000;  % Sampling frequency
 
 %%
@@ -40,4 +40,14 @@ figure
 plot(t, input_f, '--b')
 hold on
 plot(t, output_c, '-g')
+legend('ORIGINAL', 'FILTRADA')
+
+[~, f, ~, ~, y_mag, ~, ~] = my_dft(input_f(:,1), Fs);
+[~, f_c, ~, ~, y_mag_c, ~, ~] = my_dft(output_c(:,1), Fs);
+
+figure
+plot(f, y_mag(:,1), 'b')
+hold on
+plot(f_c, y_mag_c(:,1), 'r')
+legend('ORIGINAL', 'FILTRADA')
 
