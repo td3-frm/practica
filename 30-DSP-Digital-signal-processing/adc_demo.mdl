@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.32"
+    ComputedModelVersion    "1.33"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -41,7 +41,7 @@ Model {
       $ObjectID		      3
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [65.0, 24.0, 1855.0, 1056.0]
+      Location		      [1985.0, 24.0, 735.0, 576.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		4
@@ -65,9 +65,9 @@ Model {
 	IsActive		[1]
 	ViewObjType		"SimulinkTopLevel"
 	LoadSaveID		"0"
-	Extents			[1819.0, 909.0]
+	Extents			[699.0, 429.0]
 	ZoomFactor		[0.8]
-	Offset			[427.93522753724392, 210.11362551443227]
+	Offset			[441.0542751562914, 205.69457789538461]
       }
     }
   }
@@ -77,9 +77,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "rodralez"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Tue Jun 06 08:20:16 2017"
-  RTWModifiedTimeStamp	  418597792
-  ModelVersionFormat	  "1.%<AutoIncrement:32>"
+  LastModifiedDate	  "Wed Aug 16 20:44:53 2017"
+  RTWModifiedTimeStamp	  424817005
+  ModelVersionFormat	  "1.%<AutoIncrement:33>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -864,7 +864,7 @@ Model {
   }
   System {
     Name		    "adc_demo"
-    Location		    [65, 24, 1920, 1080]
+    Location		    [1985, 24, 2720, 600]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -896,7 +896,7 @@ Model {
       SID		      "25"
       Position		      [905, 439, 965, 491]
       ZOrder		      15
-      Gain		      "2^(-15)*2.5"
+      Gain		      "2^(-7)*2.5"
       ParamDataTypeStr	      "Inherit: Inherit via internal rule"
       OutDataTypeStr	      "Inherit: Inherit via internal rule"
       SaturateOnIntegerOverflow	off
@@ -913,10 +913,10 @@ Model {
       SourceBlock	      "simulink_extras/Additional\nDiscrete/Idealized ADC quantizer"
       SourceType	      "IdealADC"
       ContentPreviewEnabled   off
-      NumberOfConverterBits   "16"
+      NumberOfConverterBits   "8"
       Vmin		      "0"
       Vmax		      "5"
-      OutputDataType	      "int16"
+      OutputDataType	      "int8"
       OutputNegativeValues    on
     }
     Block {
@@ -935,9 +935,10 @@ Model {
       Position		      [1225, 369, 1285, 561]
       ZOrder		      5
       Floating		      off
-      Location		      [66, 53, 1921, 1079]
+      Location		      [1991, 78, 2716, 594]
       Open		      off
       NumInputPorts	      "3"
+      ZoomMode		      "xonly"
       List {
 	ListType		AxesTitles
 	axes1			"%<SignalLabel>"
@@ -955,8 +956,8 @@ Model {
 	MarkerStyles		"none|none|none|none|none|none"
       }
       ShowLegends	      on
-      LegendLocations	      " 0.8735     0.90997    0.062264    0.024366\n 0.7823     0.60295    0.043396    0.024366\n"
-      "0.88229     0.29593    0.054178    0.024366"
+      LegendLocations	      " 0.8735     0.90997     0.15931     0.04845\n 0.7823     0.60295     0.11103     0.04845\n"
+      "0.88229     0.29593     0.13862     0.04845"
       TimeRange		      "0.5"
       YMin		      "-5~-5~-5"
       YMax		      "5~5~5"
@@ -969,7 +970,7 @@ Model {
       Name		      "Sine Wave"
       SID		      "1"
       Ports		      [0, 1]
-      Position		      [485, 437, 535, 473]
+      Position		      [495, 437, 545, 473]
       ZOrder		      -1
       Amplitude		      "2.5"
       Frequency		      "2*pi*100"
@@ -998,7 +999,7 @@ Model {
       ZOrder		      88
       SrcBlock		      "Sine Wave"
       SrcPort		      1
-      Points		      [35, 0]
+      Points		      [25, 0]
       Branch {
 	ZOrder			101
 	Points			[0, 80]
