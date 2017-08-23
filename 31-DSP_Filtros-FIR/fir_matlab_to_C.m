@@ -48,6 +48,6 @@ legend('ORIGINAL', 'FILTRADA')
 figure
 plot(f, y_mag(:,1), 'b')
 hold on
-plot(f_c, y_mag_c(:,1), 'r')
+plot(f_c, y_mag_c(:,1), '--r')
 legend('ORIGINAL', 'FILTRADA')
 

@@ -3,8 +3,8 @@ clc
 clear 
 close all
 
-SNR = 60; % dB
-N = 10;
+SNR = 15; % dB
+N = 50;
 
 %%
 
@@ -26,12 +26,15 @@ y_ma = filter(B, A, y_n);
 
 freqz(B, A ,256)
 
+%% Plot de las seniales
+
 figure
 plot(t, y, 'b')
 hold on
 plot(t, y_n, 'g')
 hold on
 plot(t, y_ma, 'r')
+legend('Y', 'Y noise', 'Y MA')
 
 %% Respuesta en frecuencia de la senial de salida
 
@@ -42,4 +45,4 @@ figure
 plot(f, y_mag, 'b')
 hold on
 plot(f_ma, y_mag_ma, 'r')
-
+legend('Y', 'Y MA')
