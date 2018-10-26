@@ -6,7 +6,7 @@ typedef short int16_t;
 
 void main(void)
 {	
-	signed char a, b, c, d, s1, s2;
+	int8_t a, b, c, d, s1, s2;
 
 	a = 127;
 	b = 127;
