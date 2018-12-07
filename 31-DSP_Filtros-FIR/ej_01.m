@@ -19,7 +19,7 @@ signal_n = mynoise(signal, snr);
 
 %% MA
 
-N = 100;
+N = 10;
 a = 1;
 b = ones(1, N) / N;
 
