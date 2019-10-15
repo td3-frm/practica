@@ -1,8 +1,9 @@
-#include<stdio.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-int main(int arg_count,char ** arg_values)
+int main()
 {
  printf("Hola Mundo!\n");
- return 0;
+ exit(0);
 
 }
