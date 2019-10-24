@@ -40,7 +40,8 @@ void show_fe_exceptions(void)
 int main(void)
 {	
 	int ROUND_MODE;
-	
+	float a, b;
+  
 	ROUND_MODE = fegetround();		
 	printf("Current Round Mode = %d \n", ROUND_MODE );
 		
