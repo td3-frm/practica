@@ -1,79 +1,71 @@
 #include <stdio.h>
 #include <float.h>
 #include <math.h>
+#include <signal.h>
+#include <stdlib.h>
+
+// compile: gcc -Wall -O3 -std=c99 ex_04.c -o ex_04 -lm -march=corei7 -frounding-math -fsignaling-nans
+
+#define _GNU_SOURCE 1
+#define _ISOC99_SOURCE
 #include <fenv.h>
 
-// compile: gcc -Wall -O3 -std=c99 ex_02.c -o ex_02 -lm -march=corei7 -frounding-math -fsignaling-nans
-
-void test_rounding (void)
+void show_fe_exceptions(void)
 {
-  float fp1, fp2;
-  double df3;
-
- fp1 = exp(1.1);
- printf(" exp(1.1) = %+0.8f\n", fp1);
- 
- fp2 = -exp(1.1);
- 
-  printf("-exp(1.1) = %+0.8f\n", fp2);
-
- df3 = exp(1.1);
- 
-  printf("double exp(1.1) = %+0.8lf\n", df3);
-}
-
-void current_rounding (void)
-{
-	int ROUND_MODE;
+	int raised;
 	
-	ROUND_MODE = fegetround();	
-	
-	printf("Current Round Mode = %d \n", ROUND_MODE );
+    printf("Current exceptions raised: ");
+    
+    raised = fetestexcept (FE_DIVBYZERO);
+    if(raised & FE_DIVBYZERO)     printf("FE_DIVBYZERO");
+    
+    raised = fetestexcept (FE_INEXACT);
+    if(raised & FE_INEXACT)       printf("FE_INEXACT");
+    
+    raised = fetestexcept (FE_INVALID);
+    if(raised & FE_INVALID)       printf("FE_INVALID");
+    
+    raised = fetestexcept (FE_OVERFLOW);
+    if(raised & FE_OVERFLOW)      printf("FE_OVERFLOW");
+    
+    raised = fetestexcept (FE_UNDERFLOW);
+    if(raised & FE_UNDERFLOW)     printf("FE_UNDERFLOW");
+    
+    raised = fetestexcept (FE_ALL_EXCEPT);
+    if( (raised & FE_ALL_EXCEPT) == 0) printf("None exceptions");
+    
+    printf("\n");
 }
-
-void change_rounding (int rounding_mode)
-{
-	fesetround (rounding_mode);	
-}
-
+     
 int main(void)
 {	
-	printf("** Floating-point single-precision constants ** \n");
-	printf("FLT_MIN 	= %E \n", 	FLT_MIN );
-	printf("FLT_MAX 	= %E \n", 	FLT_MAX );
-	printf("FLT_EPSILON	= %E \n", 	FLT_EPSILON ); // En MATLAB: eps(single(1))
-	printf("\n");
+	int ROUND_MODE;
 	
-		printf("** Floating-point double-precision constants ** \n");
-	printf("DBL_MIN 	= %E \n", 	DBL_MIN );
-	printf("DBL_MAX 	= %E \n", 	DBL_MAX );
-	printf("DBL_EPSILON	= %E \n", 	DBL_EPSILON ); // En MATLAB: eps(1)
-	printf("\n");
+	ROUND_MODE = fegetround();		
+	printf("Current Round Mode = %d \n", ROUND_MODE );
+		
+    show_fe_exceptions();
+      
+    /* Temporarily raise other exceptions */
+    feclearexcept(FE_ALL_EXCEPT);
+    feraiseexcept(FE_INEXACT);
+    show_fe_exceptions();
+    
+    feclearexcept(FE_ALL_EXCEPT);
+    feraiseexcept(FE_INVALID);
+    show_fe_exceptions();
 
-	printf("** Floating point rounding modes ** \n");
-	printf("Rounding Mode FE_TONEAREST	= %d \n", 	FE_TONEAREST );
-	printf("Rounding Mode FE_DOWNWARD	= %d \n", 	FE_DOWNWARD );
-	printf("Rounding Mode FE_UPWARD		= %d \n", 	FE_UPWARD );
-	printf("Rounding Mode FE_TOWARDZERO	= %d \n", 	FE_TOWARDZERO );
-	printf("\n");
-	
-	current_rounding();
-	test_rounding();
-	printf("\n");
-	
-	change_rounding(FE_DOWNWARD);
-	current_rounding();
-	test_rounding();
-	printf("\n");
-	
-	change_rounding(FE_UPWARD);
-	current_rounding();
-	test_rounding();
-	printf("\n");
+    feclearexcept(FE_ALL_EXCEPT);    
+    feraiseexcept(FE_DIVBYZERO);
+    show_fe_exceptions();
 
-	change_rounding(FE_TOWARDZERO);
-	current_rounding();
-	test_rounding();
-	printf("\n");
-	return 0;
+    feclearexcept(FE_ALL_EXCEPT);
+    feraiseexcept(FE_OVERFLOW);
+    show_fe_exceptions();
+
+    feclearexcept(FE_ALL_EXCEPT);
+    feraiseexcept(FE_UNDERFLOW);
+    show_fe_exceptions();
+
+	return 0;	
 }

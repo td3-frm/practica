@@ -8,64 +8,58 @@
 #define _ISOC99_SOURCE
 #include <fenv.h>
 
-// compile: gcc -Wall -O3 -std=c99 ex_04.c -o ex_04 -lm -march=corei7 -frounding-math -fsignaling-nans
-
-void show_fe_exceptions(void)
-{
-	int raised;
+// compile: gcc -Wall -O3 -std=c99 ex_05.c -o ex_05 -lm -march=corei7 -frounding-math -fsignaling-nans
+    
+void fpe_handler(int sig){
 	
-    printf("Current exceptions raised: ");
-    
-    raised = fetestexcept (FE_DIVBYZERO);
-    if(raised & FE_DIVBYZERO)     printf("FE_DIVBYZERO");
-    
-    raised = fetestexcept (FE_INEXACT);
-    if(raised & FE_INEXACT)       printf("FE_INEXACT");
-    
-    raised = fetestexcept (FE_INVALID);
-    if(raised & FE_INVALID)       printf("FE_INVALID");
-    
-    raised = fetestexcept (FE_OVERFLOW);
-    if(raised & FE_OVERFLOW)      printf("FE_OVERFLOW");
-    
-    raised = fetestexcept (FE_UNDERFLOW);
-    if(raised & FE_UNDERFLOW)     printf("FE_UNDERFLOW");
-    
-    raised = fetestexcept (FE_ALL_EXCEPT);
-    if( (raised & FE_ALL_EXCEPT) == 0) printf("None exceptions");
-    
-    printf("\n");
+	if (sig != SIGFPE)
+		return;
+	
+	printf ("UPS! Floating Point Exception \n");
+
+	if(fetestexcept(FE_INVALID)) printf("FE_INVALID\n");
+	if(fetestexcept(FE_INEXACT)) printf("FE_INEXACT\n");
+	if(fetestexcept(FE_DIVBYZERO)) printf("FE_DIVBYZERO\n");
+	if(fetestexcept(FE_OVERFLOW)) printf("FE_OVERFLOW\n");
+	if(fetestexcept(FE_UNDERFLOW)) printf("FE_UNDERFLOW\n");
+	if(fetestexcept(FE_ALL_EXCEPT) == 0) printf("None exceptions\n");
+		
+	exit(EXIT_FAILURE);
 }
-     
+
 int main(void)
 {	
 	int ROUND_MODE;
 	
-	ROUND_MODE = fegetround();		
-	printf("Current Round Mode = %d \n", ROUND_MODE );
+	feclearexcept (FE_ALL_EXCEPT);
+	
+	// signal(SIGFPE, fpe_handler);
+
+	// feenableexcept(FE_INVALID   | 
+		   // FE_INEXACT   | 
+                   // FE_DIVBYZERO | 
+                   // FE_OVERFLOW  | 
+                   // FE_UNDERFLOW);
+	                 
+    ROUND_MODE = fegetround();		
+    printf("Current Round Mode = %d \n", ROUND_MODE );
 		
-    show_fe_exceptions();
-      
-    /* Temporarily raise other exceptions */
+    /* Temporarily raise other exceptions. */
     feclearexcept(FE_ALL_EXCEPT);
     feraiseexcept(FE_INEXACT);
-    show_fe_exceptions();
     
     feclearexcept(FE_ALL_EXCEPT);
     feraiseexcept(FE_INVALID);
-    show_fe_exceptions();
 
     feclearexcept(FE_ALL_EXCEPT);    
     feraiseexcept(FE_DIVBYZERO);
-    show_fe_exceptions();
 
     feclearexcept(FE_ALL_EXCEPT);
     feraiseexcept(FE_OVERFLOW);
-    show_fe_exceptions();
 
     feclearexcept(FE_ALL_EXCEPT);
     feraiseexcept(FE_UNDERFLOW);
-    show_fe_exceptions();
 
-	return 0;	
+	return 0;
+	
 }
