@@ -38,7 +38,7 @@ int main(void)
 	printf("acum_1 = %f \n", acum_1 );
 	printf("acum_2 = %f \n", acum_2 );
 	
-	printf("Error en acum_1 = %.20lf \n", acum_1 - (10000000.0 * 0.01));
+	printf("Error en acum_1 = %.20lf \n", acum_1 - (100000.0 ));
 	printf("Error en acum_2 = %.20lf \n", acum_2 - (10000000.0));
 	
 	return 0;
