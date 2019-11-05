@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.45"
+    ComputedModelVersion    "1.53"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -89,8 +89,8 @@ Model {
 	ViewObjType		"SimulinkTopLevel"
 	LoadSaveID		"0"
 	Extents			[1817.0, 907.0]
-	ZoomFactor		[1.7499999999999998]
-	Offset			[176.84337009952617, 337.98390243783905]
+	ZoomFactor		[1.25]
+	Offset			[46.500512956669013, 301.77199767593424]
       }
       Object {
 	$PropName		"DockComponentsInfo"
@@ -124,9 +124,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "rodralez"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Mon Apr 08 11:37:23 2019"
-  RTWModifiedTimeStamp	  476624238
-  ModelVersionFormat	  "1.%<AutoIncrement:45>"
+  LastModifiedDate	  "Thu Oct 31 22:55:57 2019"
+  RTWModifiedTimeStamp	  494463351
+  ModelVersionFormat	  "1.%<AutoIncrement:53>"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
   LibraryLinkDisplay	  "none"
@@ -1074,14 +1074,14 @@ Model {
     TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
     TiledPageScale	    1
     ShowPageBoundaries	    off
-    ZoomFactor		    "175"
+    ZoomFactor		    "125"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "30"
+    SIDHighWatermark	    "34"
     Block {
       BlockType		      Gain
       Name		      "ADC output"
       SID		      "25"
-      Position		      [680, 419, 750, 491]
+      Position		      [500, 419, 570, 491]
       ZOrder		      15
       BackgroundColor	      "red"
       ParamDataTypeStr	      "Inherit: Inherit via internal rule"
@@ -1093,7 +1093,7 @@ Model {
       Name		      "Idealized ADC quantizer"
       SID		      "5"
       Ports		      [1, 1]
-      Position		      [505, 417, 590, 493]
+      Position		      [325, 417, 410, 493]
       ZOrder		      4
       BackgroundColor	      "orange"
       AttributesFormatString  "(settings: %<NumberOfConverterBits>-bit converter\\nVmin: %<Vmin>, Vmax: %<Vmax>)"
@@ -1103,7 +1103,7 @@ Model {
       SourceProductName	      "Simulink"
       SourceProductBaseCode   "SL"
       ContentPreviewEnabled   off
-      NumberOfConverterBits   "16"
+      NumberOfConverterBits   "12"
       Vmin		      "0"
       Vmax		      "5"
       OutputDataType	      "int16"
@@ -1114,7 +1114,7 @@ Model {
       Name		      "Quantization error"
       SID		      "7"
       Ports		      [2, 1]
-      Position		      [835, 502, 865, 533]
+      Position		      [655, 502, 695, 538]
       ZOrder		      6
       BackgroundColor	      "gray"
       Inputs		      "+-"
@@ -1127,7 +1127,7 @@ Model {
       Name		      "Scope"
       SID		      "6"
       Ports		      [3]
-      Position		      [930, 359, 990, 551]
+      Position		      [750, 359, 810, 551]
       ZOrder		      5
       BackgroundColor	      "green"
       HideAutomaticName	      off
@@ -1143,28 +1143,28 @@ Model {
       "1 0.0745098039215686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{struct('Color',[0.92941"
       "1764705882 0.694117647058824 0.125490196078431],'LineStyle','-','LineWidth',2,'Marker','none','Visible','on')}},"
       "'UserDefinedChannelNames',{{}},'NumLines',1,'LineNames',{{'Signal'}},'ShowContent',true,'Placement',1),struct('M"
-      "inYLimReal','-36864.00000','MaxYLimReal','4096.00000','YLabelReal','','MinYLimMag','   0.00000','MaxYLimMag','36"
-      "864.00000','LegendVisibility','on','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickC"
-      "olor',[1 1 1],'ColorOrder',[1 1 0.0666666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0."
-      "16078431372549;0.392156862745098 0.831372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.05"
-      "88235294117647 1 1;1 0.0745098039215686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{stru"
-      "ct('Color',[0 0.749019607843137 0.749019607843137],'LineStyle','-','LineWidth',2,'Marker','none','Visible','on')"
-      "}},'UserDefinedChannelNames',{{}},'NumLines',1,'LineNames',{{'ADC output'}},'ShowContent',true,'Placement',2),st"
-      "ruct('MinYLimReal','-36863.6875','MaxYLimReal','4093.1875','YLabelReal','','MinYLimMag','0','MaxYLimMag','10','L"
-      "egendVisibility','on','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[1 1 1]"
-      ",'ColorOrder',[1 1 0.0666666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.1607843137254"
-      "9;0.392156862745098 0.831372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.058823529411764"
-      "7 1 1;1 0.0745098039215686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{struct('Color',[0"
-      ".466666666666667 0.674509803921569 0.188235294117647],'LineStyle','-','LineWidth',2,'Marker','none','Visible','o"
-      "n')}},'UserDefinedChannelNames',{{}},'NumLines',1,'LineNames',{{'Quantization error'}},'ShowContent',true,'Place"
-      "ment',3)},'DisplayPropertyDefaults',struct('YLabelReal','','LegendVisibility','on','XGrid',true,'YGrid',true,'Pl"
-      "otMagPhase',false,'ColorOrder',[1 1 0.0666666666666667;0.0745098039215686 0.623529411764706 1;1 0.41176470588235"
-      "3 0.16078431372549;0.392156862745098 0.831372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;"
-      "0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{"
-      "}},'UserDefinedChannelNames',{{}},'NumLines',0,'LineNames',{{[]}},'ShowContent',true,'Placement',1),'DisplayLayo"
-      "utDimensions',[3 1],'TimeRangeSamples','0.5','TimeRangeFrames','0.5'),extmgr.Configuration('Tools','Plot Navigat"
-      "ion',true,'OnceAtStop',false,'PreviousAutoscale','XY'),extmgr.Configuration('Tools','Measurements',true,'Version"
-      "','2018a')),'Version','2018a','Location',[66 78 1921 1079])"
+      "inYLimReal','-3.12498','MaxYLimReal','3.12483','YLabelReal','','MinYLimMag','   0.00000','MaxYLimMag','36864.000"
+      "00','LegendVisibility','on','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',["
+      "1 1 1],'ColorOrder',[1 1 0.0666666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.1607843"
+      "1372549;0.392156862745098 0.831372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.058823529"
+      "4117647 1 1;1 0.0745098039215686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{struct('Col"
+      "or',[0 0.749019607843137 0.749019607843137],'LineStyle','-','LineWidth',2,'Marker','none','Visible','on')}},'Use"
+      "rDefinedChannelNames',{{}},'NumLines',1,'LineNames',{{'ADC output'}},'ShowContent',true,'Placement',2),struct('M"
+      "inYLimReal','-0.00018','MaxYLimReal','0.0001','YLabelReal','','MinYLimMag','0','MaxYLimMag','10','LegendVisibili"
+      "ty','on','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[1 1 1],'ColorOrder'"
+      ",[1 1 0.0666666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862"
+      "745098 0.831372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.074"
+      "5098039215686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{struct('Color',[0.466666666666"
+      "667 0.674509803921569 0.188235294117647],'LineStyle','-','LineWidth',2,'Marker','none','Visible','on')}},'UserDe"
+      "finedChannelNames',{{}},'NumLines',1,'LineNames',{{'Quantization error'}},'ShowContent',true,'Placement',3)},'Di"
+      "splayPropertyDefaults',struct('YLabelReal','','LegendVisibility','on','XGrid',true,'YGrid',true,'PlotMagPhase',f"
+      "alse,'ColorOrder',[1 1 0.0666666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.160784313"
+      "72549;0.392156862745098 0.831372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.05882352941"
+      "17647 1 1;1 0.0745098039215686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefin"
+      "edChannelNames',{{}},'NumLines',0,'LineNames',{{[]}},'ShowContent',true,'Placement',1),'DisplayLayoutDimensions'"
+      ",[3 1],'TimeRangeSamples','0.5','TimeRangeFrames','0.5'),extmgr.Configuration('Tools','Plot Navigation',true,'On"
+      "ceAtStop',false,'PreviousAutoscale','XY'),extmgr.Configuration('Tools','Measurements',true,'Version','2018a')),'"
+      "Version','2018a','Location',[66 78 1281 719],'VisibleAtModelOpen','on')"
       NumInputPorts	      "3"
       Floating		      off
     }
@@ -1173,7 +1173,7 @@ Model {
       Name		      "Signal"
       SID		      "1"
       Ports		      [0, 1]
-      Position		      [300, 442, 350, 478]
+      Position		      [110, 424, 170, 486]
       ZOrder		      -1
       BackgroundColor	      "lightBlue"
       Amplitude		      "2.5"
@@ -1217,23 +1217,19 @@ Model {
       SrcPort		      1
       Points		      [27, 0]
       Branch {
-	ZOrder			163
-	Points			[0, -5]
-	Branch {
-	  ZOrder		  162
-	  DstBlock		  "Idealized ADC quantizer"
-	  DstPort		  1
-	}
-	Branch {
-	  ZOrder		  160
-	  Points		  [0, -65]
-	  DstBlock		  "Scope"
-	  DstPort		  1
-	}
+	ZOrder			179
+	DstBlock		"Idealized ADC quantizer"
+	DstPort			1
       }
       Branch {
-	ZOrder			161
-	Points			[0, 65]
+	ZOrder			177
+	Points			[0, -65]
+	DstBlock		"Scope"
+	DstPort			1
+      }
+      Branch {
+	ZOrder			163
+	Points			[0, 75]
 	DstBlock		"Quantization error"
 	DstPort			2
       }
