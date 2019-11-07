@@ -37,9 +37,9 @@ figure
 plot(t, signal, '-ob')
 hold on
 plot(t, signal_n,'--r')
-plot(t, signal_ma,'--g')
+plot(t, signal_ma,'--g', 'linewidth', 2)
 legend('ORG', 'NOISE', 'MA')
 
 figure 
-freqz(b,a,256)
+freqz(b, a, 256)
 
