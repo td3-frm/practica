@@ -10,11 +10,13 @@ clc
 
 lw = 3;
 
+OS = 1; % OverSampling factor 
+
 %% SIGNAL
 
 fn = 100;       % signal frequency (Hz)
  
-fs = 2000;     % sampling frequency (Hz)
+fs = 2000 * OS;     % sampling frequency (Hz)
 
 dt = 1/fs;      % sampling time (s)
 
@@ -24,26 +26,34 @@ signal = sin (2 * pi * fn * t); % input signal
 
 %% NOISE
 
-snr = 15;       % signal-noise ratio (dB)
+snr = 15;       % signal-noise ratio (dB)%% CUT OFF FREQUENCY
 
 signal_n = my_noise(signal, snr);
 
-%% MA FILTER
+%% CUT OFF FREQUENCY
 
-N = 10;        % Moving Average filter order
+fco = 150
+
+Fco = fco / fs ;
+
+% N = round( sqrt( 0.885894^2 +  Fco^2) / Fco )
+
+N = round( sqrt( (0.885894^2 / Fco^2) -1 ) )
+
+Fco_n = 0.885894 / sqrt( N^2 - 1 );
+
+fco_n = Fco_n * fs
+
+
+%% MA FILTER
 
 a = 1;              % Denominator coefficients
 b = ones(1, N) / N; % Numerator coefficients
 
 signal_ma = filter(b, a, signal_n); % MA signal
  
-%% PLOT
 
-figure
-plot(t(1:20), signal(1:20), '-b', 'linewidth', lw)
-hold on
-plot(t(1:20), signal_n(1:20),'--r', 'linewidth', lw)
-legend('INPUT', 'NOISE')
+%% PLOT
 
 figure
 plot(t, signal, '-b', 'linewidth', lw)
@@ -53,7 +63,9 @@ plot(t, signal_ma,'-g', 'linewidth', lw)
 legend('INPUT', 'NOISE', 'MA')
 
 figure 
-freqz(b, a, 256)
+freqz(b, a, 2048)
+
+[h, w] = freqz(b, a, 2048);
 
 %% FREQUENCY RESPONSE
 
@@ -89,3 +101,4 @@ legend('INPUT', 'MA')
 %% RMSE (Root Mean Squared Error)
 
 RMSE = rmse ( signal_d, signal_ma_d )
+
