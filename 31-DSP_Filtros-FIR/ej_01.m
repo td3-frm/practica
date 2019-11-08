@@ -44,6 +44,7 @@ plot(t(1:20), signal(1:20), '-b', 'linewidth', lw)
 hold on
 plot(t(1:20), signal_n(1:20),'--r', 'linewidth', lw)
 legend('INPUT', 'NOISE')
+grid on
 
 figure
 plot(t, signal, '-b', 'linewidth', lw)
@@ -51,9 +52,11 @@ hold on
 plot(t, signal_n,'--r', 'linewidth', lw)
 plot(t, signal_ma,'-g', 'linewidth', lw)
 legend('INPUT', 'NOISE', 'MA')
+grid on
 
 figure 
 freqz(b, a, 256)
+grid on
 
 %% FREQUENCY RESPONSE
 
@@ -66,26 +69,5 @@ plot(f, dft_mag, '--r', 'linewidth', lw)
 hold on
 plot(f_ma, dft_mag_ma,'-g', 'linewidth', lw)
 legend('NOISE', 'MA')
-
-%% CORRECTED MA SIGNAL
-
-delay = floor( N/2 );
-
-G = max (signal) / max (signal_ma) * 1.1 ;
-
-signal_d = signal(1:end-delay+1) ;
-t_d = t(1:end-delay+1) ;
-
-signal_ma_d = signal_ma(delay:end) * G ;
-t_ma_d = t(1:end-delay+1) ;
-
-figure
-plot(t_d, signal_d, '-b', 'linewidth', lw)
-hold on
-plot(t_ma_d, signal_ma_d ,'-g', 'linewidth', lw)
-legend('INPUT', 'MA')
-
-%% RMSE (Root Mean Squared Error)
-
-RMSE = rmse ( signal_d, signal_ma_d )
+grid on
 
