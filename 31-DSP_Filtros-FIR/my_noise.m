@@ -3,17 +3,25 @@ function [signal_n, var_n] = my_noise (signal, snr)
 % snr.
 %
 %   INPUT
-%       signal: Nx1 vector, input signal.
+%       signal: NxM vector, input signal.
 %       snr:    signal-to-noise relationship in dB.
 %
 %   OUTPUT
 %       signal_n: input signal with Gaussian white noise added.
 %       std_n:    noise standard deviantion.  
 %
-% Version: 002
-% Date:    2017/04/03
+% Version: 003
+% Date:    2019/11/07
 % Author:  Rodrigo Gonzalez <rodralez@frm.utn.edu.ar>
 % URL:     https://github.com/rodralez/control
+
+% Input signal order
+[n,m] = size(signal);
+
+if n < m
+    signal = signal';
+    [n,m] = size(signal);
+end
 
 % Input variance
 var_s = var(signal);
@@ -23,9 +31,6 @@ var_n = var_s / (10^( snr / 10 ));
 
 % Standard deviation
 std_n = sqrt( var_n );
-
-% Input signal order
-[n,m] = size(signal);
 
 % Standard deviation matrix
 std_m =  ones(n,m);
