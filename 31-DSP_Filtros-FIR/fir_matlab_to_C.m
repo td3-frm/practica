@@ -14,8 +14,9 @@ lw = 3;
 
 %% PARAMETERS
 
-fn1 = 500;   % Signal 1 frequency
-fn2 = 60;   % Signal 1 frequency
+fn1 = 200;   % Signal 1 frequency
+fn2 = 600;   % Signal 2 frequency
+fn_noise = 50;   % Signal 1 frequency
 fs = 10000;  % Sampling frequency
 
 %%
@@ -23,7 +24,7 @@ fs = 10000;  % Sampling frequency
 dt = 1/fs;
 t = (0:dt:0.5)';
 
-signal = sin(2 * pi * fn1 * t) + 0.5 * sin(2 * pi * fn2 * t); 
+signal = sin(2 * pi * fn1 * t) + 0.75 * sin(2 * pi * fn2 * t) + 0.25 * sin(2 * pi * fn_noise * t) ; 
 
 %% MATLAB-to-C, SINGLE PRECISION
 
@@ -32,7 +33,6 @@ signal = sin(2 * pi * fn1 * t) + 0.5 * sin(2 * pi * fn2 * t);
 input_f = single(signal);
 
 output_c = fir_matlab_wrapper( input_f );
-
 
 %% PLOT
 

@@ -33,8 +33,7 @@ void fir_filter_fixed(float *input, uint32_t N, float *output)
 	for (i=0; i < N; i++)
 	{
 		output[i] = input[i];
-	}
-	
+	}	
 }
 
 
