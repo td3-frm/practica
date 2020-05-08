@@ -13,7 +13,7 @@
 #include <signal.h>
 
 #define MENSAJE "DATA PARA PROCESO"
-#define MQ_PATH "/MQ_TD30"  
+#define MQ_PATH "/MQ_TD3"  
 
    int err, leido;
    char buff[1024];   
@@ -25,14 +25,14 @@
 
 void escribe_mensaje(int a){ 
 
-   write (0, "\nenviar mensaje\n", sizeof("\nenviar mensaje\n"));
-   
+   write(STDOUT_FILENO, "\nenviar mensaje\n", sizeof("\nenviar mensaje\n"));
+
    //-- Escribe en cola de mensajes --------------------------
    err = mq_send(mqd, MENSAJE, strlen(MENSAJE)+1, 1);  //strlen nos da la longitud de una cadena
    if(err == -1){
-        write (0, "\nerror en mq_send()\n", sizeof("\nerror en mq_send()\n"));  }
+        write(STDOUT_FILENO, "\nerror en mq_send()\n", sizeof("\nerror en mq_send()\n"));  }
    else {
-        write (0, "\nMensaje enviado\n", sizeof("\nMensaje enviado\n"));   }
+        write(STDOUT_FILENO, "\nMensaje enviado\n", sizeof("\nMensaje enviado\n"));   }
 
 }
 
@@ -41,19 +41,19 @@ void finaliza_proceso(int a){
 
    err = mq_close(mqd);
    if (( err < 0 )){
-      write (0, "\nerror en mq_close()\n", sizeof("\nerror en mq_close()\n"));
+      write(STDOUT_FILENO, "\nerror en mq_close()\n", sizeof("\nerror en mq_close()\n"));
       exit(0);   }
-   
-   write (0, "\nCola de mensajes cerrada\n", sizeof("\nCola de mensajes cerrada\n"));
+
+   write(STDOUT_FILENO, "\nCola de mensajes cerrada\n", sizeof("\nCola de mensajes cerrada\n"));
 
    err = mq_unlink(MQ_PATH);
    if(err == -1){
-      write (0, "\nerror en mq_unlink()\n", sizeof("\nerror en mq_unlink()\n"));
+      write(STDOUT_FILENO, "\nerror en mq_unlink()\n", sizeof("\nerror en mq_unlink()\n"));
       exit(0);  }
 
-   write (0, "\nCola de mensajes eliminada\n", sizeof("\nCola de mensajes eliminada\n"));
+   write(STDOUT_FILENO, "\nCola de mensajes eliminada\n", sizeof("\nCola de mensajes eliminada\n"));
 
-   write (0, "\nTerminando proceso...\n", sizeof("\nTerminando proceso...\n"));
+   write(STDOUT_FILENO, "\nTerminando proceso...\n", sizeof("\nTerminando proceso...\n"));
 
    exit(0);
 }
@@ -66,11 +66,13 @@ int main() {
 
    printf("Soy el proceso: %d \n ",getpid());
 
+   mq_unlink(MQ_PATH);
+
    attr.mq_msgsize = sizeof(buff);
    attr.mq_maxmsg = 5;
    
-   // abrir de cola de mensajes
-    mqd = mq_open(MQ_PATH, O_RDWR | O_CREAT | O_NONBLOCK, 0666, &attr);
+   // abrir y crear cola de mensajes
+    mqd = mq_open(MQ_PATH, O_RDWR | O_CREAT , 0666, &attr);
    if (mqd < 0) {
       printf ("error en mq_open()");   
       exit(-1);  }

@@ -22,6 +22,37 @@ int *ptr;
 char buff[1024];
 struct stat sb;
 
+printf("O_RDWR : %d\n", O_RDWR);
+printf("O_WRONLY : %d\n", O_WRONLY);
+printf("O_RDWR : %d\n", O_RDWR);
+printf("O_RDWR : %d\n", O_RDWR);
+printf("O_RDWR : %d\n", O_RDWR);
+printf("O_RDWR : %d\n", O_RDWR);
+printf("O_RDWR : %d\n", O_RDWR);
+printf("O_RDWR : %d\n", O_RDWR);
+
+|       O_RDONLY
+              Open the queue to receive messages only.
+
+       
+              Open the queue to send messages only.
+
+        Open the queue to both send and receive messages.
+
+       Zero or more of the following flags can additionally be ORed in oflag:
+
+       O_CLOEXEC (since Linux 2.6.26)
+              Set the close-on-exec flag for the message queue descriptor.  See open(2) for a discussion of why this flag is useful.
+
+       O_CREAT
+              Create the message queue if it does not exist.  The owner (user ID) of the message queue is set to the effective user ID of the calling
+              process.  The group ownership (group ID) is set to the effective group ID of the calling process.
+
+       O_EXCL If O_CREAT was specified in oflag, and a queue with the given name already exists, then fail with the error EEXIST.
+
+       O_NONBLOCK
+
+
 //--- Crea la memoria compartida, y obtiene el descriptor
    fd = shm_open(MEM_COM , O_RDWR|O_CREAT, 0777 );
    if (fd == -1){

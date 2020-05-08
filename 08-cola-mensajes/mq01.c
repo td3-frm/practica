@@ -20,7 +20,7 @@ int main() {
    char buff[1024];   
    mqd_t mqd; 
    struct mq_attr attr, attr_rcv;
-   
+  
    // Se fijan algunos parametros de la cola de mensajes antes de crearla
    attr.mq_msgsize = sizeof(buff);
    attr.mq_maxmsg = 5;
@@ -33,6 +33,14 @@ int main() {
       
    printf("Cola de mensajes creada\n"); 
    
+   // Escribe en cola de mensajes
+   err = mq_send(mqd, MENSAJE, strlen(MENSAJE)+1, 1);  //strlen nos da la longitud de una cadena
+   if(err == -1){
+      printf ("error en mq_send()");
+      exit(-1);    }
+
+   printf("Mensaje enviado (%d)\n", err);
+   
    // Se leen parametros de la cola de mensajes
    if (mq_getattr(mqd, &attr_rcv) == -1){
       printf ("error en mq_getattr()");
@@ -42,16 +50,8 @@ int main() {
    printf("Longitud max. de mensaje: %ld\n",attr_rcv.mq_msgsize);
    printf("Nros de mensajes pendientes en cola de mensajes: %ld\n",attr_rcv.mq_curmsgs);
 
-   // Escribe en cola de mensajes
-   err = mq_send(mqd, MENSAJE, strlen(MENSAJE)+1, 1);  //strlen nos da la longitud de una cadena
-   if(err == -1){
-      printf ("error en mq_send()");
-      exit(-1);    }
-
-   printf("Mensaje enviado (%d)\n", err);
-   
    // Se lee de cola de mensajes
-   leido = mq_receive(mqd, buff, attr.mq_msgsize, 0);
+   leido = mq_receive(mqd, buff, attr_rcv.mq_msgsize, 0);
    if (( leido < 0 )){
       printf ("error en mq_receive()");
       exit(-1); }

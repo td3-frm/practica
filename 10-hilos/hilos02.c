@@ -26,8 +26,8 @@ int rc;
      printf("Main creando el hilo nro %d\n", t);
      arre[t] = t;
      
-     rc = pthread_create(&hilo[t], NULL, hola , (void *)(&t)  );
-     //rc = pthread_create(&hilo[t], NULL, hola , (void *) (&arre[t]) );
+     //rc = pthread_create(&hilo[t], NULL, hola , (void *)(&t)  );
+     rc = pthread_create(&hilo[t], NULL, hola , (void *) (&arre[t]) );
      
      if (rc != 0){
          printf("ERROR; pthread_create() = %d\n", rc);

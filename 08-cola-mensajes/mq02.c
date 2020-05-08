@@ -24,20 +24,20 @@ void sig_user1(int a){
    
    err = mq_close(mqd);
    if (( err < 0 )){
-      write (0, "\nerror en mq_close()\n", sizeof("\nerror en mq_close()\n"));
+      write(STDOUT_FILENO, "\nerror en mq_close()\n", sizeof("\nerror en mq_close()\n"));
       exit(-1);   }
 
-   write (0, "\nCola de mensajes cerrada\n", sizeof("\nCola de mensajes cerrada\n"));
-   
+   write(STDOUT_FILENO, "\nCola de mensajes cerrada\n", sizeof("\nCola de mensajes cerrada\n"));
+
 
    err = mq_unlink(MQ_PATH);
    if(err == -1){
-   	  write (0, ")\nerror en mq_unlink())\n", sizeof(")\nerror en mq_unlink())\n"));
+        write(STDOUT_FILENO, ")\nerror en mq_unlink())\n", sizeof(")\nerror en mq_unlink())\n"));
       exit(-1);    }
 
-   write (0, ")\nCola de mensajes eliminada\n", sizeof(")\nCola de mensajes eliminada\n"));
+   write(STDOUT_FILENO, ")\nCola de mensajes eliminada\n", sizeof(")\nCola de mensajes eliminada\n"));
 
-   write (0, "\nTerminando proceso...\n", sizeof("\nTerminando proceso...\n"));
+   write(STDOUT_FILENO, "\nTerminando proceso...\n", sizeof("\nTerminando proceso...\n"));
    
    exit(0);
 }
@@ -48,7 +48,6 @@ int main() {
 
    printf ("Mi pid es %d\n", getpid());
 
-   //mq_unlink(MQ_PATH);
 
    attr.mq_msgsize = sizeof(buff);
    attr.mq_maxmsg = 5;
@@ -69,7 +68,7 @@ int main() {
  
       printf("Mensaje enviado (%d)\n", err);
 
-      sleep(3);
+      sleep(1);
 
    }
 
