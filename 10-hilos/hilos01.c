@@ -8,11 +8,8 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-pthread_t hilo[1];
-int rc,t;
-
-
 void *hola(void * nro) {
+  
    sleep(2);
    printf("Hola, soy el hilo %d\n", * (int*) nro);
    pthread_exit(NULL);
@@ -21,14 +18,20 @@ void *hola(void * nro) {
 }
 
 int main() {
-     t=0;
-     printf("Main creando el hilo nro %d\n", t);
-        
-     rc = pthread_create(&hilo[0], NULL, hola , (void *)(&t)  );
+
+    pthread_t hilo[1];
+    int rc, t;
+
+    t = 0;
      
-     if (rc != 0){
+    printf("Main creando el hilo nro %d\n", t);
+        
+    rc = pthread_create(&hilo[0], NULL, hola , (void *)(&t)  );
+     
+    if (rc != 0){
          printf("ERROR; pthread_create() = %d\n", rc);
-         exit(-1);        }
+         exit(-1);        
+         };
   
    printf("Espera a que termine hilo\n");
 
@@ -37,6 +40,6 @@ int main() {
    printf("Termina hilo main\n");
 
    pthread_exit(NULL);
-
    
+   return 0;
 }
