@@ -26,7 +26,7 @@ int dato, i, pos;
 	
 		sleep(1);	//este retardo es para ver como funciona con mutex
 		
-		pthread_mutex_lock(&mutex);   // BLOQUEO MUTEX
+		pthread_mutex_lock(&mutex);   
 		
 		while (cant < MAX_BUFFER){ 		//si buffer lleno
 		
@@ -40,7 +40,7 @@ int dato, i, pos;
 			printf("Productor posicion: %d, dato: %d, cantidad: %d, i: %d\n",pos,dato,cant,i);	 
 		}
 		
-		pthread_mutex_unlock(&mutex);	     //liberamos el mutex
+		pthread_mutex_unlock(&mutex);	     
 	}
 		printf("Termino produccion: %d\n",i);
 		pthread_exit(0);
@@ -56,7 +56,7 @@ int dato, i, pos;
 	
 	while( i < DATOS_A_PRODUCIR ) {
 	
-		pthread_mutex_lock(&mutex); 	// bloquear mutex
+		pthread_mutex_lock(&mutex); 	
 		
 		while (cant > 0){ 		// si buffer vacio
 			dato = buffer[pos];

@@ -17,12 +17,12 @@ int local1 , j, numero;
 
 	numero= *(int*)nro;
 	
-	s=pthread_mutex_lock(&mtx);         //bloqueo del mutex
+	s=pthread_mutex_lock(&mtx);       
 	if (s!=0){
 		printf("ERROR; pthread_mutex() = %d\n", s);
 		exit(-1);   }
 	
-	printf("Hilo= %d bloquea mutex\n", numero);
+	printf("Hilo= %d decrementa mutex\n", numero);
 	
 	for(j=0;j< vueltas;j++){
 		local1 = total;
@@ -31,9 +31,9 @@ int local1 , j, numero;
 	}
 	
 	printf("Hola soy, el thread %d, total= %d\n", numero,total);
-	printf("Hilo= %d desbloquea mutex\n", numero);
+	printf("Hilo= %d incrementa mutex\n", numero);
 	
-	s=pthread_mutex_unlock(&mtx);      //desbloqueo del mutex
+	s=pthread_mutex_unlock(&mtx);      
 	if (s!=0){
 		printf("ERROR; pthread_mutex() = %d\n", s);
 		exit(-1);    }

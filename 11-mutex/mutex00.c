@@ -19,7 +19,7 @@ int numero;
 
 	numero= *(int*)nro;
 	
-	s=pthread_mutex_lock(&mtx); //bloqueo del mutex
+	s=pthread_mutex_lock(&mtx); 
    	if (s!=0){
       printf("ERROR; pthread_mutex() = %d\n", s);
       exit(-1);   }
@@ -27,7 +27,7 @@ int numero;
    	total=total+numero;
    	printf("Hilo 0, recibe nro=%d, total= %d\n",numero, total);
 
-   	s=pthread_mutex_unlock(&mtx); //desbloqueo del mutex
+   	s=pthread_mutex_unlock(&mtx); 
    	if (s!=0){
       printf("ERROR; pthread_mutex() = %d\n", s);
       exit(-1);    }
@@ -54,14 +54,14 @@ int rc ;
        printf("ERROR; pthread_create() = %d\n", rc);
        exit(-1);    }
 
-	s=pthread_mutex_lock(&mtx);  //bloqueo del mutex
+	s=pthread_mutex_lock(&mtx);  
 	if (s!=0){
       printf("ERROR; pthread_mutex() = %d\n", s);
       exit(-1);   }
 
 	total=total+t;
 
-	s=pthread_mutex_unlock(&mtx); //desbloqueo del mutex
+	s=pthread_mutex_unlock(&mtx); 
 	if (s!=0){
       printf("ERROR; pthread_mutex() = %d\n", s);
       exit(-1);    }
