@@ -29,7 +29,7 @@ int main()
    pthread_t hilo[100];
    int rc, t, arre[100];
 
-   for(t=0; t< 100 ; t++){
+   for(t=0; t<100; t++){
       printf("Creando el hilo %d\n", t);
       arre[t] = t;
       rc = pthread_create(&hilo[t], NULL, hilo1 , (void *)(&arre[t]) );
@@ -40,7 +40,7 @@ int main()
    }
 
    int i;
-   for (i=0; i<100;i++) {
+   for (i=0; i<100; i++){
        while(pthread_join(hilo[i], NULL));
    }
   
