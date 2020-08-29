@@ -39,16 +39,6 @@ if ( length (estimate) ~= length (true) )
     error('rmse: vectors must have the same length')
 end
 
-[n, m] = size(estimate);
-if n < m   
-    estimate = estimate';
-end
-
-[n, m] = size(true);
-if n < m   
-    true = true';
-end
-
 rmserr =  sqrt ( mean ( ( estimate - true).^2 ) ) ;
 
 end

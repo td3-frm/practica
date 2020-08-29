@@ -71,7 +71,6 @@ void mexFunction( int nlhs, mxArray *plhs[],
     output = mxGetData(plhs[0]);
 
     /* call the computational C routine */
-    
     fir_filter_float(input, N, output); 
     // fir_filter_fixed(input, N, output);   
     

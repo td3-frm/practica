@@ -33,14 +33,15 @@ int main(void)
 {	
   feclearexcept (FE_ALL_EXCEPT);
 	
-  //~ signal(SIGFPE, fpe_handler);
+  signal(SIGFPE, fpe_handler);
   //~ signal(SIGFPE, SIG_DFL);
   
-  //~ feenableexcept(FE_INVALID   | 
-                 //~ FE_INEXACT   | 
-                 //~ FE_DIVBYZERO | 
-                 //~ FE_OVERFLOW  | 
-                 //~ FE_UNDERFLOW);
+  feenableexcept(
+                 FE_INVALID   | 
+             //~ FE_INEXACT   | 
+                 FE_DIVBYZERO | 
+                 FE_OVERFLOW  | 
+                 FE_UNDERFLOW);
 	                 
   /* Temporarily raise other exceptions. */
   
