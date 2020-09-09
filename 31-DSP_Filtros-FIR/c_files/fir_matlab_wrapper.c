@@ -20,7 +20,6 @@
 #include "mex.h"
 #include "fir_filter.h"
 
-
 /* The gateway function */
 void mexFunction( int nlhs, mxArray *plhs[],
                   int nrhs, const mxArray *prhs[])

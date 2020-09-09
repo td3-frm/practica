@@ -14,7 +14,7 @@ clear
 
 fn1 = 300;   % Signal 1 frequency
 fn2 = 600;   % Signal 2 frequency
-fn3 = 50 ;   % Signal 3 frequency, interference
+fn3 = 50;    % Signal 3 frequency, interference
 fs = 10000;  % Sampling frequency
 
 %% a) Genere una señal senoidal 
@@ -52,9 +52,9 @@ legend('Señal con ruido')
 subplot(2,1,2)
 plot(t, signal, '-g')
 hold on
-plot(t, signal_fir_c, '--b')
+plot(t, signal_fir_c, '--ob')
 hold on
-plot(t, signal_fir_m, '--m')
+plot(t, signal_fir_m, '--om')
 hold off
 
 grid on
