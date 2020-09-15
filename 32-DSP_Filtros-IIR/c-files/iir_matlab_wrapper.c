@@ -114,7 +114,7 @@ void mexFunction( int nlhs, mxArray *plhs[],
 
     /* call the computational C routine */
     iir_filter_I_float(input, coeff, gain, N, output);   
-//    iir_filter_II_float(input, coeff, gain, N, output); 
+//    	(input, coeff, gain, N, output); 
      
     
 }

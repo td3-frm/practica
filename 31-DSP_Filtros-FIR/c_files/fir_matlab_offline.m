@@ -1,4 +1,4 @@
-% fir_matlab_to_C: script to compare FIR filters implemented in C and MATLAB
+% fir_matlab_offline: script to compare FIR filters implemented in C and MATLAB
 % languages.
 %
 % Version: 003

@@ -12,8 +12,8 @@ close all
 
 %% Parametros
 
-fn1 = 1000;               % Signal 1 frequency
-fn2 = 10000;              % Signal 2 frequency, interference
+fn1 = 1000;             % Signal 1 frequency
+fn2 = 10000;            % Signal 2 frequency, interference
 fs  = 44100;            % Sampling freq.
 
 %% Genere una señal senoidal
