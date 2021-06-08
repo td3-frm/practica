@@ -1,5 +1,5 @@
 ## Técnicas Digitales III
-## Trabajo Práctico 14 : Introducción a FreeRTOS
+### Trabajo Práctico 14 : Introducción a FreeRTOS
 
 * 1 - Cree un programa usando FreeRtos que cumpla con las siguientes consignas:
     - Ejecutar dos tareas, **Tarea1** y **Tarea2**, con los niveles de prioridad apropiados.
