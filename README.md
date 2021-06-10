@@ -2,7 +2,7 @@
 
 Archivos de la parte práctica de la cátedra de Técnicas Digitales III, Universidad Tecnológica Nacional, Facultad Regional Mendoza, Argentina.
 
-## Horarios de consulta (última actualización 08/06/2021)
+## Horarios de consulta :
 
 * Teoría: martes de 17 a 19 hs. 
 
