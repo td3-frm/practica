@@ -1,67 +1,71 @@
-// Version: 002
-// Date:    2020/08/20
+// Version: 001
+// Date:    2020/03/19
 // Author:  Rodrigo Gonzalez <rodralez@frm.utn.edu.ar>
 
-#ifdef LINUX
-/* _GNU_SOURCE is needed (supposedly) for the feenableexcept
- * prototype to be defined in fenv.h on GNU systems.
- * Presumably it will do no harm on other systems.
- */
-#ifndef _GNU_SOURCE
-#define _GNU_SOURCE
-#endif
-
-#endif // LINUX
-
-#include <fenv.h>
 #include <stdio.h>
+#include <float.h>
+#include <math.h>
 #include <signal.h>
 #include <stdlib.h>
 
-// compile: gcc -Wall -O3 ex_06.c -o ex_06 -lm -DLINUX
+#define _GNU_SOURCE 1
+#define _ISOC99_SOURCE
+#include <fenv.h>
 
-//~ jmp_buf fpe;
+// Compile usando el siguiente comando
+// compile: gcc -Wall -O3 -std=c99 ex_06.c -o ex_06 -lm -march=corei7 -frounding-math -fsignaling-nans
     
 void fpe_handler(int sig){
 	
-  //~ longjmp(fpe, 1);
-  
+  //~ if (sig != SIGFPE)
+    //~ return;
+	
+  printf ("UPS! Floating Point Exception \n");
+
+  if(fetestexcept(FE_INVALID)) printf("FE_INVALID\n");
+  if(fetestexcept(FE_INEXACT)) printf("FE_INEXACT\n");
+  if(fetestexcept(FE_DIVBYZERO)) printf("FE_DIVBYZERO\n");
+  if(fetestexcept(FE_OVERFLOW)) printf("FE_OVERFLOW\n");
+  if(fetestexcept(FE_UNDERFLOW)) printf("FE_UNDERFLOW\n");
+  if(fetestexcept(FE_ALL_EXCEPT) == 0) printf("None exceptions\n");
+		
   exit(EXIT_FAILURE);
 }
 
 int main(void)
 {	
+  int ROUND_MODE;
+	
   feclearexcept (FE_ALL_EXCEPT);
 	
   signal(SIGFPE, fpe_handler);
-  //~ signal(SIGFPE, SIG_DFL);
   
-  feenableexcept(
-                 FE_INVALID   | 
-             //~ FE_INEXACT   | 
+  feenableexcept(FE_INVALID   | 
+                 FE_INEXACT   | 
                  FE_DIVBYZERO | 
                  FE_OVERFLOW  | 
                  FE_UNDERFLOW);
 	                 
+  ROUND_MODE = fegetround();		
+  printf("Current Round Mode = %d \n", ROUND_MODE );
+		
   /* Temporarily raise other exceptions. */
+  //~ feclearexcept(FE_ALL_EXCEPT);
+  printf("point 1");
   
-  printf("Force FE_INEXACT exception.\n");
-  feclearexcept(FE_ALL_EXCEPT);
   feraiseexcept(FE_INEXACT);
+  printf("point 2");
   
-  printf("Force FE_INVALID exception.\n");    
+    
   feclearexcept(FE_ALL_EXCEPT);
   feraiseexcept(FE_INVALID);
 
-  printf("Force FE_DIVBYZERO exception.\n");
   feclearexcept(FE_ALL_EXCEPT);    
   feraiseexcept(FE_DIVBYZERO);
 
-  printf("Force FE_OVERFLOW exception.\n");
   feclearexcept(FE_ALL_EXCEPT);
   feraiseexcept(FE_OVERFLOW);
 
-  printf("Force FE_UNDERFLOW exception.\n");
   feclearexcept(FE_ALL_EXCEPT);
   feraiseexcept(FE_UNDERFLOW);
 

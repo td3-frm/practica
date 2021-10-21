@@ -7,15 +7,15 @@
 #include <math.h>
 #include <fenv.h>
 
-typedef long int int64_t
+typedef long int int64_t;
 
 int main(void)
 {	
 	float a, b, c, f1, f2;
 	double d1;
 
-	a = 1000000000.0;
-	b =   20000000.0;
+	a = 1000000000.0;	// mil millones
+	b =   20000000.0;	// 20 millones
 	c =   20000000.0;
 	
 	f1 = (a * b) * c;
@@ -23,8 +23,8 @@ int main(void)
 
 	d1 = (double) (a) * (double) (b) * (double) (c);
 
-	printf("f1 = %f \n", f1 );
-	printf("f2 = %f \n", f2 );
+	printf("f1 = %lf \n", f1 );
+	printf("f2 = %lf \n", f2 );
 	printf("d1 = %lf \n", d1 );
 	
 	printf("Error en f1 = %10e \n", f1 - 400000000000000000000000.0 );
@@ -43,8 +43,8 @@ int main(void)
 	printf("acum_1 = %f \n", acum_1 );
 	printf("acum_2 = %f \n", acum_2 );
 	
-	printf("Error en acum_1 = %.20lf \n", acum_1 - (10000000.0 * 0.01));
-	printf("Error en acum_2 = %.20lf \n", acum_2 - (10000000.0));
+	printf("Error en acum_1 = %10e \n", acum_1 - (100000.0));
+	printf("Error en acum_2 = %10e \n", acum_2 - (10000000.0));
 	
 	return 0;
 }

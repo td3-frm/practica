@@ -22,6 +22,7 @@ void show_fe_exceptions(void)
     printf("Current exceptions raised: ");
     
     raised = fetestexcept (FE_DIVBYZERO);
+      
     if(raised & FE_DIVBYZERO)     printf("FE_DIVBYZERO");
     
     raised = fetestexcept (FE_INEXACT);
@@ -40,6 +41,7 @@ void show_fe_exceptions(void)
     if( (raised & FE_ALL_EXCEPT) == 0) printf("None exceptions");
     
     printf("\n");
+    printf("valor raised %d\n", raised);
 }
      
 int main(void)
