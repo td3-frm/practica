@@ -2,13 +2,13 @@
 // Date:    2020/03/19
 // Author:  Rodrigo Gonzalez <rodralez@frm.utn.edu.ar>
 
+// Compile usando el siguiente comando
+// compile: gcc -Wall -std=c99 ex_02.c -o ex_02 -lm -frounding-math -fsignaling-nans
+
 #include <stdio.h>
 #include <float.h>
 #include <math.h>
 #include <fenv.h>
-
-// Compile usando el siguiente comando
-// compile: gcc -Wall -O3 -std=c99 ex_02.c -o ex_02 -lm -march=corei7 -frounding-math -fsignaling-nans
 
 void test_rounding (void)
 {
