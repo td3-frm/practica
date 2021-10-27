@@ -1,5 +1,5 @@
 /* ========================================================================
- * fir_matlab_wrapper.c: interface MATLAB-TO-C functions for FIR
+ * fir_wrapper.c: interface MATLAB-TO-C functions for FIR
  * filtering.
  *
  * INPUT
@@ -8,18 +8,17 @@
  *  OUTPUT
  *      output : NX1 output (filtered) vector.
  *
- * Version: 001
- * Date:    2017/04/03
+ * Version: 002
+ * Date:    2021/10/27
  * Author:  Rodrigo Gonzalez <rodralez@frm.utn.edu.ar>
  * URL:     https://github.com/rodralez/control
  *
- * compile: mex fir_matlab_wrapper.c fir_filter.c
+ * compile: mex fir_wrapper.c fir_filter.c
  * ===================================================================== */
 
 #include <stdio.h>
 #include "mex.h"
 #include "fir_filter.h"
-
 
 /* The gateway function */
 void mexFunction( int nlhs, mxArray *plhs[],
