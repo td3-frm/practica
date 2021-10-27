@@ -39,12 +39,12 @@ void mexFunction( int nlhs, mxArray *plhs[],
         mexErrMsgIdAndTxt("MyToolbox:iir_matlab_wrapper:nlhs","One output required.");
     }
     
-    /* make sure the first input argument is vector */
-    if( !mxIsSingle(prhs[0]) || 
-         mxIsComplex(prhs[0]) ||
-         mxGetNumberOfElements(prhs[0])==1 ) {
-        mexErrMsgIdAndTxt("MyToolbox:iir_matlab_wrapper:notScalar","Input multiplier must be a vector.");
-    }
+//     /* make sure the first input argument is vector */
+//     if( !mxIsSingle(prhs[0]) || 
+//          mxIsComplex(prhs[0]) ||
+//          mxGetNumberOfElements(prhs[0])==1 ) {
+//         mexErrMsgIdAndTxt("MyToolbox:iir_matlab_wrapper:notScalar","Input multiplier must be a vector.");
+//     }
     
     /* make sure the first input argument is type single */
     if( !mxIsSingle(prhs[0]) || 
@@ -71,7 +71,8 @@ void mexFunction( int nlhs, mxArray *plhs[],
     output = mxGetData(plhs[0]);
 
     /* call the computational C routine */
-    fir_filter_float(input, N, output); 
-    // fir_filter_fixed(input, N, output);   
+    
+    fir_online_float(input, output);
+//     fir_online_fixed(input, output);
     
  }
