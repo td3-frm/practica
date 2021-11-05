@@ -38,7 +38,7 @@ void mexFunction( int nlhs, mxArray *plhs[],
     /* make sure the first input argument is type single */
     if( !mxIsSingle(prhs[0]) || 
          mxIsComplex(prhs[0])) {
-        mexErrMsgIdAndTxt("MyToolbox:iir_matlab_wrapper:notSingle","Input matrix must be type single.");
+        mexErrMsgIdAndTxt("MyToolbo2x:iir_matlab_wrapper:notSingle","Input matrix must be type single.");
     }
     
     /* check that number of columns in input matrix argument is 1 */
@@ -57,8 +57,10 @@ void mexFunction( int nlhs, mxArray *plhs[],
     output = mxGetData(plhs[0]);
 
     /* call the computational C routine */
-//     iir_2do_df1_float(input, output);
-    iir_2do_df2_float(input, output);
+    iir_2nd_df1_float(input, output);
+//     iir_2nd_df2_float(input, output);
+//     iir_nth_df1_float(input, output);
+//     iir_nth_df2_float(input, output);
      
 
 }

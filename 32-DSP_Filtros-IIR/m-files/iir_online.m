@@ -68,12 +68,14 @@ grid on
 
 [f1, mag_s ] = my_dft(adc_signal_f, Fs);
 [f2, maf_f ] = my_dft(iir_output, Fs);
+[f3, maf_m ] = my_dft(iir_output_m, Fs);
 
 figure
-plot(f1, mag_s, '-b')
+plot(f1, mag_s, '-k')
 hold on
-plot(f2, maf_f, '--r')
-legend('INPUT SIGNAL' , 'FIR OUTPUT SIGNAL')
+plot(f2, maf_f, '--b')
+plot(f2, maf_m, '--r')
+legend('INPUT SIGNAL' , 'IIR OUTPUT MATLAB', 'IIR OUTPUT C')
 grid on
 
 
