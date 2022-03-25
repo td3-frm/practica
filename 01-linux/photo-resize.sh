@@ -1,5 +1,5 @@
-## Scrip para fijar el tamaño de una imagen a 800x600. La funcion convert 
-## es parte del paquete imagemagick
+## Cambiar tamaño de imagenes jpg o png dentro de directorio a 800x600. 
+## convert es parte del paquete imagemagick
 
 #!/bin/bash
 
@@ -20,7 +20,4 @@ do
 	convert $img -resize 800x600 -quality 100 -auto-orient sm_$img
 done
 
-dingdong
-
-echo "Conversión de fotos finalizada!"
-
+echo "Conversión finalizada!"
