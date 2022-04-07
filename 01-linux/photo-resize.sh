@@ -1,8 +1,13 @@
 ## Cambiar tamaño de imagenes jpg o png dentro de directorio a 800x600. 
 ## convert es parte del paquete imagemagick
+## Se ejecuta como:
+## $ photo-resize.sh ./ruta/al/directorio
+## ./ruta/al/directorio es la ruta absoluta o relativa al directorio en 
+## el que están las fotos.
 
 #!/bin/bash
 
+## $1 contiene ./ruta/al/directorio
 cd $1
 
 for img in $(ls *.[jJ][pP][gG])
