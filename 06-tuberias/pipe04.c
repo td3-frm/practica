@@ -9,18 +9,19 @@
 #include <stdlib.h>
 #include<sys/wait.h> 
 
-#define DATA "INFORMACION IMPORTANTE"
+#define DATA "TECNICAS DIGITALES III ES LO MAS"
+#define ERROR "SIGPIPE, problema con pipeline.\n "
 #define BUFF_SIZE 80
 
 void pipe_sign_handler(int a){
    
-   write (STDOUT_FILENO, "\n Problema con pipeline.\n ", sizeof("\n Problema con pipeline.\n"));
+   write (STDOUT_FILENO, ERROR, sizeof(ERROR));
    exit(-1);
 }
 
 int main (){
 
-   int ipc[2], proc;
+   int ipc[2];
    int leido, success;
    char buff[BUFF_SIZE] = {0};
 
@@ -35,23 +36,21 @@ int main (){
       
       case 0:
          close(ipc[1]);
-         printf("Leyendo tuberia... \n");
+         printf("Hijo leyendo tuberia... \n");
          leido = read(ipc[0], buff, sizeof(buff));
          if(leido < 1){
-            write(STDOUT_FILENO, "\nError al leer tuberia", sizeof("\nError al leer tuberia"));
+            write(STDOUT_FILENO, "Error al leer tuberia\n", sizeof("Error al leer tuberia\n"));
          }else {
-            write(STDOUT_FILENO, "Leido de la tuberia ", sizeof("\nLeido de la tuberia"));
+            write(STDOUT_FILENO, "Leido de la tuberia \"", sizeof("Leido de la tuberia \""));
             write(STDOUT_FILENO, buff, leido-1);
-            printf(", por el proceso hijo, pid %d \n", getpid());
+            printf("\" por el proceso hijo.\n");
          }
          exit(0);
          
       default:
          strncpy(buff, DATA, sizeof(DATA));
          write(ipc[1], buff, sizeof(DATA));
-      
          wait(NULL);      
-         
          exit(0);      
    }
 }

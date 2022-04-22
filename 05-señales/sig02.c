@@ -18,7 +18,7 @@ int main ()
    
    printf("Proceso PID = %d\n", getpid());   
    
-   while(1);
+   while(TRUE);
    
    exit(0);
 }

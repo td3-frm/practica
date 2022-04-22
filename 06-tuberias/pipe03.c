@@ -9,13 +9,14 @@
 #include <stdlib.h>
 #include<sys/wait.h> 
 
-#define FRASE_A "INFORMACION IMPORTANTE"
-#define FRASE_B "INFORMACION IMPORTANTE"
+#define FRASE_A "INFORMACION IMPORTANTE A"
+#define FRASE_B "INFORMACION IMPORTANTE B"
 #define BUFF_SIZE 80
 
 void pipe_sign_handler(int a){
    
-   write (STDOUT_FILENO, "\n Problema con pipeline.\n ", sizeof("\n Problema con pipeline.\n"));
+   write (STDOUT_FILENO, "Problema con pipeline\n ", sizeof("Problema con pipeline\n"));
+   exit(-1);
 }
 
 int main (){
@@ -31,10 +32,10 @@ int main (){
    switch (fork()){ 
       
       case 0:
-      close(ipc[0]);      
-      strncpy(buff, FRASE_A, sizeof(FRASE_A)); 
-      write(ipc[1], buff, sizeof(FRASE_A));
-      exit(0);
+		  close(ipc[0]);      
+		  strncpy(buff, FRASE_A, sizeof(FRASE_A)); 
+		  write(ipc[1], buff, sizeof(FRASE_A));
+		  exit(0);
       break;
       
       default:
@@ -46,17 +47,18 @@ int main (){
             write(ipc[1], buff,    sizeof(FRASE_B));
             exit(0);      
          break;
+         
          default:
             close(ipc[1]);
             int i;
             for(i=0; i<2; i++){
                leido = read(ipc[0], buff, sizeof(buff));
                if(leido < 1){
-                  write (STDOUT_FILENO, "\nError al leer tuberia", sizeof("\nError al leer tuberia"));
+                  write (STDOUT_FILENO, "Error al leer tuberia\n", sizeof("Error al leer tuberia\n"));
                }else {
-                  write (STDOUT_FILENO, "Leido de la tuberia ", sizeof("\nLeido de la tuberia"));
+                  write (STDOUT_FILENO, "Leido de la tuberia \"", sizeof("Leido de la tuberia \""));
                   write (STDOUT_FILENO, buff, leido-1);
-                  printf(", por el proceso padre, pid %d \n", getpid());
+                  printf("\" por el proceso padre\n.");
                }
             }
 

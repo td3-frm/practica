@@ -21,24 +21,24 @@ int main (){
    if (pipe(ipc) == -1)
       exit(-1);
 
-   switch (fork()){ 
+   switch (fork()){
       
       case 0:
+		 printf("Hijo escribiendo en tuberia, pid %d... \n", getpid());
          close(ipc[1]);
          strncpy(buff, DATA, sizeof(DATA)); 
          write(ipc[1], buff, sizeof(DATA));
          exit(0);
          
       default:
-         printf("Leyendo tuberia... \n");
-         leido = read(ipc[0], buff, sizeof(buff));
+         printf("Padre leyendo tuberia, pid %d... \n", getpid());
+         leido = read(ipc[0], buff, sizeof(buff));	
          if(leido < 1){
-            write (STDOUT_FILENO, "\nError al leer tuberia", sizeof("\nError al leer tuberia"));
+            write (STDOUT_FILENO, "Error al leer tuberia\n", sizeof("Error al leer tuberia\n"));
          }else {
-
-            write (STDOUT_FILENO, "Leido de la tuberia ", sizeof("\nLeido de la tuberia"));
+			write (STDOUT_FILENO, "Leido de la tuberia \"", sizeof("Leido de la tuberia \""));
             write (STDOUT_FILENO, buff, leido-1);
-            printf(", por el proceso padre, pid %d \n", getpid());
+            printf("\" por el proceso padre.\n");
          }
          wait(NULL);
 
