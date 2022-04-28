@@ -22,57 +22,60 @@ int main(){
 
    // FIFO puede ser leida, escrita y ejecutada por: 
    err = mkfifo(FIFO_PATH, 0777); // el resto de los usuarios del sistema.
+   
    if(err == -1) {
-      write(STDOUT_FILENO, "\nError al crear FIFO, la FIFO ya existe", sizeof("\nError al crear FIFO, la FIFO ya existe"));
+      write (STDOUT_FILENO, "Error al crear FIFO, la FIFO ya existe\n", sizeof("Error al crear FIFO, la FIFO ya existe\n"));
    }else {
-      write(STDOUT_FILENO, "\nFIFO creado correctamente\n", sizeof("\nFIFO creado correctamente\n"));
+      write (STDOUT_FILENO, "FIFO creada correctamente\n", sizeof("FIFO creada correctamente\n"));
    }
-
 
    switch (fork()){ 
       
-      case -1:      
-         write(STDOUT_FILENO, "\nError al crear hijo", sizeof("\nError al crear hijo"));
+      case -1:
+         write(STDOUT_FILENO, "Error al crear hijo\n", sizeof("Error al crear hijo"\n));
          return -1;
       break;
 
       case 0:
 
-         write(STDOUT_FILENO, "\nEntrando proceso HIJO", sizeof("\nEntrando proceso HIJO"));
+         write (STDOUT_FILENO, "Hijo inicia\n", sizeof("Hijo inicia\n"));
 
          sleep(5);
 
          /*  
-         //El Hijo que debe hacer con la FIFO ?
+			El Hijo que debe hacer con la FIFO ?
          */      
 
-         write(STDOUT_FILENO, "\nSaliendo proceso HIJO\n", sizeof("\nSaliendo proceso HIJO\n"));
+         write (0, "Hijo termina\n", sizeof("Hijo termina\n")); 
          exit(0);
       break;
 
       default:
-         write(STDOUT_FILENO, "\nEntrando proceso PADRE", sizeof("\nEntrando proceso PADRE"));
+         write (STDOUT_FILENO, "Padre inicia\n", sizeof("Padre inicia\n"));
+      
+         sleep(2);
 
          fifo_d = open(FIFO_PATH, O_WRONLY, 0);
          if(fifo_d == -1){
-            write(STDOUT_FILENO, "\nPADRE: Error al abrir FIFO ", sizeof("\nPADRE: Error al abrir FIFO "));
+            write(STDOUT_FILENO, "Padre, error al abrir FIFO\n", sizeof("Padre, error al abrir FIFO\n"));
             return -1;
          }else {
-            write(STDOUT_FILENO, "\nPADRE: FIFO abierto correctamente", sizeof("\nPADRE: FIFO abierto correctamente"));
+            write(STDOUT_FILENO, "Padre, FIFO abierta correctamente\n", sizeof("Padre, FIFO abierta correctamente\n"));
          }
 
          // Se escribe en el FIFO
          err = write(fifo_d, MENSAJE, sizeof(MENSAJE));
          if(err == -1) {
-            write(STDOUT_FILENO, "\nPADRE: Error al escribir en FIFO", sizeof("\nPADRE: Error al escribir en FIFO"));
+            write(STDOUT_FILENO, "Padre, error al escribir en FIFO\n", sizeof("Padre, error al escribir en FIFO\n"));
          } else {
-            write(STDOUT_FILENO, "\nPADRE: Escritos MENSAJE en FIFO", sizeof("\nPADRE: Escritos MENSAJE en FIFO"));
+            write(STDOUT_FILENO, "Padre, escrito MENSAJE en FIFO\n", sizeof("Padre, escrito MENSAJE en FIFO\n"));
          }
-
+         
          close(fifo_d);
+         
+         wait(NULL);   
 
-         wait(NULL);
-         write(STDOUT_FILENO, "\nSaliendo proceso PADRE\n", sizeof("\nSaliendo proceso PADRE\n"));
+         write (0, "Padre termina\n", sizeof("Padre termina\n")); 
 
       break;   
    }

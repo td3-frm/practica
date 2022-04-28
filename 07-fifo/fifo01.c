@@ -12,6 +12,7 @@
 
 #define MENSAJE "HOLA PROCESO HIJO"
 #define FIFO_PATH "/tmp/MI_FIFO"
+#define PADRE_ESCRIBE
 
 int main(){
 
@@ -41,69 +42,75 @@ int main(){
       break;
 
       case 0:      //Hijo
-         write (STDOUT_FILENO, "Proceso Hijo\n", sizeof("Proceso Hijo\n"));
+         write (STDOUT_FILENO, "Hijo inicia\n", sizeof("Hijo inicia\n"));
 
          sleep(5);
 
 		  // Se abre FIFO	
          fifo_d = open(FIFO_PATH, O_RDONLY, 0); // O_NONBLOCK
          if(fifo_d == -1){
-            write (STDOUT_FILENO, "Hijo: Error al abrir FIFO\n", sizeof("Hijo: Error al abrir FIFO\n"));
+            write (STDOUT_FILENO, "Hijo, error al abrir FIFO\n", sizeof("Hijo: error al abrir FIFO\n"));
             return -1;
          }else {
-            write (STDOUT_FILENO, "Hijo: FIFO abierta correctamente\n", sizeof("Hijo: FIFO abierta correctamente\n"));
+            write (STDOUT_FILENO, "Hijo, FIFO abierta correctamente\n", sizeof("Hijo: FIFO abierta correctamente\n"));
          }
 
          // Se lee FIFO
          leido = read(fifo_d, buff, sizeof(buff));
          if(leido == -1){
-            write(STDOUT_FILENO, "Hijo: Error al leer FIFO\n", sizeof("Hijo: Error al leer FIFO\n"));
+            write(STDOUT_FILENO, "Hijo, error al leer FIFO\n", sizeof("Hijo: error al leer FIFO\n"));
          }else {
-            write(STDOUT_FILENO, "Hijo: Leido de la FIFO \"", sizeof("Hijo: Leido de la FIFO \""));
+            write(STDOUT_FILENO, "Hijo, leido de la FIFO \"", sizeof("Hijo: leido de la FIFO \""));
             write(STDOUT_FILENO, buff, leido-1);
             write(STDOUT_FILENO, "\"\n", sizeof("\"\n"));
          }
          close(fifo_d);
 
-         write(STDOUT_FILENO, "\nSaliendo proceso HIJO\n", sizeof("\nSaliendo proceso HIJO\n"));
+         write (0, "Hijo termina\n", sizeof("Hijo termina\n")); 
          exit(0);
 
       break;
       
       default:     //Padre
-         write (0, "Proceso Padre\n", sizeof("Proceso Padre\n")); 
+         write (STDOUT_FILENO, "Padre inicia\n", sizeof("Padre inicia\n"));
       
          sleep(2);
 
          fifo_d = open(FIFO_PATH, O_WRONLY, 0);
          if(fifo_d == -1){
-            write(STDOUT_FILENO, "Padre: Error al abrir FIFO\n", sizeof("Padre: Error al abrir FIFO\n"));
+            write(STDOUT_FILENO, "Padre, error al abrir FIFO\n", sizeof("Padre: error al abrir FIFO\n"));
             return -1;
          }else {
-            write(STDOUT_FILENO, "Padre: FIFO abierta correctamente\n", sizeof("Padre: FIFO abierta correctamente\n"));
+            write(STDOUT_FILENO, "Padre, FIFO abierta correctamente\n", sizeof("Padre: FIFO abierta correctamente\n"));
          }
 
          // Se escribe en el FIFO
          err = write(fifo_d, MENSAJE, sizeof(MENSAJE));
          if(err == -1) {
-            write(STDOUT_FILENO, "Padre: Error al escribir en FIFO\n", sizeof("Padre: Error al escribir en FIFO\n"));
+            write(STDOUT_FILENO, "Padre, error al escribir en FIFO\n", sizeof("Padre: error al escribir en FIFO\n"));
          } else {
-            write(STDOUT_FILENO, "Padre: Escrito MENSAJE en FIFO\n", sizeof("Padre: Escrito MENSAJE en FIFO\n"));
+            write(STDOUT_FILENO, "Padre, escrito MENSAJE en FIFO\n", sizeof("Padre: escrito MENSAJE en FIFO\n"));
          }
          
          close(fifo_d);
          
          wait(NULL);   
 
-         write (0, "Proceso Padre termina\n", sizeof("Proceso Padre termina\n")); 
+         write (0, "Padre termina\n", sizeof("Padre termina\n")); 
                
       break;   
    }
    
-   //Eliminación FIFO
-   //if (unlink(FIFO_PATH) < 0){
-   //   printf("\nNo se puede borrar FIFO.\n"); }
-      
+   // Eliminación FIFO
+   // if (unlink(FIFO_PATH) == 0)
+   // {
+   // 	printf("Se borra FIFO\n"); 
+   // }
+   // else
+   // {
+   // 	printf("No se puede borrar FIFO\n"); 
+   // }  
+   
    exit(0);
 
 }

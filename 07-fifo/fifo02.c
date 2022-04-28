@@ -23,65 +23,73 @@ int main(){
 
    // FIFO puede ser leida, escrita y ejecutada por: 
    err = mkfifo(FIFO_PATH, 0777); // el resto de los usuarios del sistema.
+   
    if(err == -1) {
-      write(STDOUT_FILENO, "\nError al crear FIFO, la FIFO ya existe", sizeof("\nError al crear FIFO, la FIFO ya existe"));
+      write (STDOUT_FILENO, "Error al crear FIFO, la FIFO ya existe\n", sizeof("Error al crear FIFO, la FIFO ya existe\n"));
    }else {
-      write(STDOUT_FILENO, "\nFIFO creado correctamente\n", sizeof("\nFIFO creado correctamente\n"));
+      write (STDOUT_FILENO, "FIFO creada correctamente\n", sizeof("FIFO creada correctamente\n"));
    }
 
    switch (fork()){
 
       case -1:
-         write(STDOUT_FILENO, "\nError al crear hijo", sizeof("\nError al crear hijo"));
+         write(STDOUT_FILENO, "Error al crear hijo\n", sizeof("Error al crear hijo"\n));
          return -1;
       break;
 
       case 0:
 
-         write(STDOUT_FILENO, "\nEntrando proceso HIJO", sizeof("\nEntrando proceso HIJO"));
+         write (STDOUT_FILENO, "Hijo inicia\n", sizeof("Hijo inicia\n"));
 
          sleep(5);
 
          fifo_d = open(FIFO_PATH, O_RDONLY, 0); 
+         
          if(fifo_d == -1){
-            write(STDOUT_FILENO, "\nHIJO: Error al abrir FIFO ", sizeof("\nHIJO: Error al abrir FIFO "));
+            write (STDOUT_FILENO, "Hijo, error al abrir FIFO\n", sizeof("Hijo: error al abrir FIFO\n"));
             return -1;
          }else {
-            write(STDOUT_FILENO, "\nHIJO: FIFO abierto correctamente", sizeof("\nHIJO: FIFO abierto correctamente"));
+            write (STDOUT_FILENO, "Hijo, FIFO abierta correctamente\n", sizeof("Hijo: FIFO abierta correctamente\n"));
          }
 
          // Se lee FIFO
-         leido = read(fifo_d, buff, sizeof(buff));   
+         leido = read(fifo_d, buff, sizeof(buff));
          if(leido == -1){
-            write(STDOUT_FILENO, "\nHIJO: Error al leer en FIFO", sizeof("\nHIJO: Error al leer en FIFO"));
+            write(STDOUT_FILENO, "Hijo, error al leer FIFO\n", sizeof("Hijo: error al leer FIFO\n"));
          }else {
-            write(STDOUT_FILENO, "\nHIJO: Leido del FIFO: ", sizeof("\nHIJO: Leido del FIFO: "));
+            write(STDOUT_FILENO, "Hijo, leido de la FIFO \"", sizeof("Hijo: leido de la FIFO \""));
             write(STDOUT_FILENO, buff, leido-1);
-            write(STDOUT_FILENO, "\n", sizeof("\n"));
+            write(STDOUT_FILENO, "\"\n", sizeof("\"\n"));
          }
-
          close(fifo_d);
 
-         write(STDOUT_FILENO, "\nSaliendo proceso HIJO\n", sizeof("\nSaliendo proceso HIJO\n"));
+         write (0, "Hijo termina\n", sizeof("Hijo termina\n")); 
          exit(0);
       break;
 
       default:
-         write(STDOUT_FILENO, "\nEntrando proceso PADRE", sizeof("\nEntrando proceso PADRE")); 
+         write (STDOUT_FILENO, "Padre inicia\n", sizeof("Padre inicia\n"));
 
          /*  
-         //El padre que debe hacer con la FIFO ?
+             El padre, ¿que debe hacer con la FIFO?
          */      
          
          wait(NULL);   
-         write (0, "\nSaliendo proceso PADRE\n", sizeof("\nSaliendo proceso PADRE\n")); 
+         
+         write (0, "Padre termina\n", sizeof("Padre termina\n")); 
          
          break;
    }
    
-   //Eliminación FIFO
-   //if (unlink(FIFO_PATH) < 0) {
-    //   printf("\nNo se puede borrar FIFO.\n"); }
+   // Eliminación FIFO
+   // if (unlink(FIFO_PATH) == 0)
+   // {
+   // 	printf("Se borra FIFO\n"); 
+   // }
+   // else
+   // {
+   // 	printf("No se puede borrar FIFO\n"); 
+   // } 
        
    exit(0);   
 }
