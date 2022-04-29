@@ -12,7 +12,6 @@
 
 #define MENSAJE "HOLA PROCESO HIJO"
 #define FIFO_PATH "/tmp/MI_FIFO"
-#define PADRE_ESCRIBE
 
 int main(){
 
@@ -23,9 +22,9 @@ int main(){
    //unlink(FIFO_PATH);    // si la FIFO existe la borro
 
    // FIFO puede ser leida, escrita y ejecutada por:
-   err = mkfifo(FIFO_PATH, S_IRUSR|S_IWUSR|S_IXUSR|  // el usuario que la creo
-                           S_IRGRP|S_IWGRP|S_IXGRP|  // el grupo al que pertenece el usuario
-                           S_IROTH|S_IWOTH|S_IXOTH); // el resto de los usuarios del sistema
+   err = mkfifo(FIFO_PATH, S_IRUSR | S_IWUSR | S_IXUSR|  // el usuario que la creo
+                           S_IRGRP | S_IWGRP | S_IXGRP|  // el grupo al que pertenece el usuario
+                           S_IROTH | S_IWOTH | S_IXOTH); // el resto de los usuarios del sistema
 
    //err = mkfifo(FIFO_PATH, 0777);
    if(err == -1) {
@@ -57,7 +56,7 @@ int main(){
 
          // Se lee FIFO
          leido = read(fifo_d, buff, sizeof(buff));
-         if(leido == -1){
+         if(leido < 1){
             write(STDOUT_FILENO, "Hijo, error al leer FIFO\n", sizeof("Hijo: error al leer FIFO\n"));
          }else {
             write(STDOUT_FILENO, "Hijo, leido de la FIFO \"", sizeof("Hijo: leido de la FIFO \""));
@@ -101,16 +100,10 @@ int main(){
       break;   
    }
    
-   // Eliminación FIFO
-   // if (unlink(FIFO_PATH) == 0)
-   // {
-   // 	printf("Se borra FIFO\n"); 
-   // }
-   // else
-   // {
-   // 	printf("No se puede borrar FIFO\n"); 
-   // }  
-   
+   //Eliminación FIFO
+   //if (unlink(FIFO_PATH) < 0){
+   //   printf("No se puede borrar FIFO.\n"); }
+      
    exit(0);
 
 }
