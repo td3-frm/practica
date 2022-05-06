@@ -3,7 +3,7 @@
  * 
  * Comando para compilar:
  * 
- * 		gcc -c padre.c && gcc -O0 hijo.o padre.o -o padre
+ * 		gcc -m32 -c padre.c && gcc -m32 hijo.o padre.o -o padre
 
 */
 
