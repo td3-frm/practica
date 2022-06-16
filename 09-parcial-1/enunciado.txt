@@ -1,0 +1,18 @@
+
+2) Modifique el archivo padre.c para que envíe al proceso hijo el contenido de la variable tx_buffer mediante la tubería declarada en la variable fd. 
+
+3) Ambos archivos se compilan con el siguiente comando en consola: 
+
+$ gcc -m32 -c padre.c && gcc -m32 hijo.o padre.o -o padre
+
+4) El binario generado por el comando anterior se ejecuta en consola con: 
+
+$ ./padre 
+
+5) El proceso hijo cuando reciba el contenido de tx_buffer por la tubería, imprimirá por consola dos líneas: 
+
+$ Leido desde tuberia: HOLA HIJO MIO 
+
+$ El resultado del ejercicio es: XXX 
+
+6) Copie el número de 3 cifras XXX en la casilla de abajo. Este número es la respuesta del ejercicio.

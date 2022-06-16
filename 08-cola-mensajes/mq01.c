@@ -28,7 +28,7 @@ int main() {
    // Se crea cola de mensajes
    mqd = mq_open(MQ_PATH, O_RDWR | O_CREAT, 0777, &attr); 
    if (mqd < 0) {
-      printf ("error en mq_open()");   
+      printf ("error en mq_open()\n");   
       exit(-1); }
       
    printf("Cola de mensajes creada\n"); 
@@ -36,24 +36,24 @@ int main() {
    // Escribe en cola de mensajes
    err = mq_send(mqd, MENSAJE, strlen(MENSAJE)+1, 1);  //strlen nos da la longitud de una cadena
    if(err == -1){
-      printf ("error en mq_send()");
+      printf ("error en mq_send()\n");
       exit(-1);    }
 
    printf("Mensaje enviado (%d)\n", err);
    
    // Se leen parametros de la cola de mensajes
    if (mq_getattr(mqd, &attr_rcv) == -1){
-      printf ("error en mq_getattr()");
+      printf ("error en mq_getattr()\n");
       exit(-1); }
       
-   printf("Nro max. de mensajes en cola de mensajes: %ld\n",attr_rcv.mq_maxmsg);
-   printf("Longitud max. de mensaje: %ld\n",attr_rcv.mq_msgsize);
-   printf("Nros de mensajes pendientes en cola de mensajes: %ld\n",attr_rcv.mq_curmsgs);
+   printf("Nro max. de mensajes en cola de mensajes: %ld\n", attr_rcv.mq_maxmsg);
+   printf("Longitud max. de mensaje: %ld\n", attr_rcv.mq_msgsize);
+   printf("Nros de mensajes pendientes en cola de mensajes: %ld\n", attr_rcv.mq_curmsgs);
 
    // Se lee de cola de mensajes
    leido = mq_receive(mqd, buff, attr_rcv.mq_msgsize, 0);
    if (( leido < 0 )){
-      printf ("error en mq_receive()");
+      printf ("error en mq_receive()\n");
       exit(-1); }
 
    printf("Mensaje leido: %s\n", buff);
@@ -61,7 +61,7 @@ int main() {
    // Se cierra cola de mensajes
    err = mq_close(mqd);
    if (( err < 0 )){
-      printf ("error en mq_close()");
+      printf ("error en mq_close()\n");
       exit(-1);   }
 
       printf("Cola de mensajes cerrada (%d)\n", err);
@@ -69,7 +69,7 @@ int main() {
    // Se elimina cola de mensajes
    err = mq_unlink(MQ_PATH);
    if(err == -1){
-      printf ("error en mq_unlink()");
+      printf ("error en mq_unlink()\n");
       exit(-1);   }
 
       printf("Cola de mensajes eliminada (%d)\n", err);
