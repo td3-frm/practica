@@ -1,6 +1,6 @@
 ## Técnicas Digitales III
 
-### Trabajo Práctico 15: FreeRTOS manejo de datos y ISR
+### Trabajo Práctico 15 FreeRTOS : cola de mensajes, manejo de prioridades, ISR y sincronización.
 
 * 1 - Crear un programa usando FreeRTOS que cumpla con las siguientes consignas:
     - Ejecutar dos tareas, **Tarea1** y **Tarea2**, con los niveles de prioridad apropiados y un mecanismo de sincronización.
@@ -11,14 +11,14 @@
 * 2 - Crear un programa usando FreeRTOS que cumpla con las siguientes consignas:
     - Poseer dos tareas, **Tarea1** y **Tarea2**, una cola de mansajes entre ellas y una rutina de atención de interrupción de timer RIT.
 	- La **Tarea1** debe enviar elementos a la cola de mensajes cada  1500 ms.
-	- La **Tarea2** debe esperar de la interrupción del timer RIT (que será de 3 segundo) . Una vez que expira el timer, consumir un elemento, indicándolo por puerto serie el elemento consumido y cambiar el estado del led Amarillo.
+	- La **Tarea2** debe esperar de la interrupción del timer RIT (que será de 3 segundo). Una vez que expira el timer, consumir un elemento, indicándolo por puerto serie el elemento consumido y cambiar el estado del led Amarillo.
 
 * 3 - Crear un programa usando FreeRTOS que cumpla con las siguientes consignas:
 	- Posea tres tareas, la **Tarea1**, **Tarea2** y **Tarea3**.
 	- La **Tarea1**, debe tener la mayor prioridad, la **Tarea2** media prioridad y **Tarea3** baja prioridad.
 	- La **Tarea1** y la **Tarea3** comparten el puerto serie, enviando un mensaje cada una periodicamente, cada 800 ms.
-	- La **Tarea2** es una tarea periódica, que ejecuta de manera contínua un bucle de busy waiting de 	1 segundo aprox , luego cambia el led Rojo cada y genera un delay de 200 ms.
-    - Plantee su solución para evitar inversión de prioridad
+	- La **Tarea2** es una tarea periódica, que ejecuta de manera contínua un bucle de busy waiting de 	1 segundo aprox, luego cambia el led Rojo cada y genera un delay de 200 ms.
+    - Plantee su solución para evitar inversión de prioridad.
 
 * 4 - En la tarea ImprimeHora mostrada en la página 95 del libro Sistemas Empotrados en Tiempo Real, ¿se podría solucionar el arbitraje del acceso al puerto serie cortando las interrupciones mientras se llama a SeriePuts()? En caso afirmativo, ¿existe alguna ventaja en el uso de semáforos?
 
