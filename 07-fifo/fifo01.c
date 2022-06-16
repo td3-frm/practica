@@ -57,9 +57,9 @@ int main(){
          // Se lee FIFO
          leido = read(fifo_d, buff, sizeof(buff));
          if(leido < 1){
-            write(STDOUT_FILENO, "Hijo, error al leer FIFO\n", sizeof("Hijo: error al leer FIFO\n"));
+            write(STDOUT_FILENO, "Hijo, FIFO vacia\n", sizeof("Hijo, FIFO vacia\n"));
          }else {
-            write(STDOUT_FILENO, "Hijo, leido de la FIFO \"", sizeof("Hijo: leido de la FIFO \""));
+            write(STDOUT_FILENO, "Hijo, leido de la FIFO \"", sizeof("Hijo, leido de la FIFO \""));
             write(STDOUT_FILENO, buff, leido-1);
             write(STDOUT_FILENO, "\"\n", sizeof("\"\n"));
          }
@@ -86,9 +86,9 @@ int main(){
          // Se escribe en el FIFO
          err = write(fifo_d, MENSAJE, sizeof(MENSAJE));
          if(err == -1) {
-            write(STDOUT_FILENO, "Padre, error al escribir en FIFO\n", sizeof("Padre: error al escribir en FIFO\n"));
+            write(STDOUT_FILENO, "Padre, FIFO vacia\n", sizeof("Padre, FIFO vacia\n"));
          } else {
-            write(STDOUT_FILENO, "Padre, escrito MENSAJE en FIFO\n", sizeof("Padre: escrito MENSAJE en FIFO\n"));
+            write(STDOUT_FILENO, "Padre, escrito MENSAJE en FIFO\n", sizeof("Padre, escrito MENSAJE en FIFO\n"));
          }
          
          close(fifo_d);
