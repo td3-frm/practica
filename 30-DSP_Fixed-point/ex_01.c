@@ -3,9 +3,12 @@
 #include <stdint.h>
 #include <limits.h>
 
+// Para usar la biblioteca <math.h>, compilar con "-lm", por ejemplo:
+// gcc ex_01.c -o ex_01 -lm
+
 int main(void)
 {	
-	signed char a, b, c, d, s1, s2;
+	int8_t a, b, c, d, s1, s2;
 	 
 	a = 127;
 	b = 127;
@@ -21,8 +24,8 @@ int main(void)
 	printf("s1 = %d \n", s1 );
 	printf("s2 = %d \n", s2 );
 	
-	printf("%d \n" , INT_MAX);
-	printf("%d \n" , INT_MIN);
+	printf("INT_MAX = %d \n" , INT_MAX);
+	printf("INT_MIN = %d \n" , INT_MIN);
 	
 	return 0;
 }
