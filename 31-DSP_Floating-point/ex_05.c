@@ -1,6 +1,10 @@
-// Version: 002
+// Version: 004
 // Date:    2022/04/05
 // Author:  Rodrigo Gonzalez <rodralez@frm.utn.edu.ar>
+
+#define _GNU_SOURCE 1
+#define _ISOC99_SOURCE
+#include <fenv.h>
 
 #include <stdio.h>
 #include <float.h>
@@ -9,12 +13,11 @@
 #include <stdlib.h>
 
 // Compile usando el siguiente comando
-// compile: gcc -Wall -O3 -std=c99 ex_04.c -o ex_04 -lm -march=corei7 -frounding-math -fsignaling-nans
+// compile: gcc -Wall -std=c99 ex_05.c -o ex_05 -lm -frounding-math -fsignaling-nans -DLINUX
 
-#define _GNU_SOURCE 1
-#define _ISOC99_SOURCE
-#include <fenv.h>
-
+// Variables globales
+fexcept_t excepts;
+     
 void show_fe_exceptions(void)
 {
     printf("current exceptions raised: ");
@@ -26,40 +29,36 @@ void show_fe_exceptions(void)
     if(fetestexcept(FE_ALL_EXCEPT)==0) printf(" none");
     printf("\n");
 }
-     
+
+void fpe_handler(int sig){
+
+  printf ("UPS! Floating Point Exception \n");
+  
+  show_fe_exceptions();
+  
+  exit(EXIT_FAILURE);
+}
+
 int main(void)
-{	
-  int ROUND_MODE;
-	
-  ROUND_MODE = fegetround();		
-  printf("Current Round Mode = %d \n", ROUND_MODE );
-		
-  show_fe_exceptions();
-      
-  /* Temporarily raise other exceptions */
-  feclearexcept(FE_ALL_EXCEPT);
-  feraiseexcept(FE_INEXACT);
-  show_fe_exceptions();
+{ 
+  //~ feclearexcept (FE_ALL_EXCEPT);
+  //~ feenableexcept(FE_ALL_EXCEPT); 
+   	
+  //~ signal(SIGFPE, fpe_handler);
     
-  feclearexcept(FE_ALL_EXCEPT);
+  /* Setup a "current" set of exception flags. */
   feraiseexcept(FE_INVALID);
   show_fe_exceptions();
 
-  feclearexcept(FE_ALL_EXCEPT);    
-  feraiseexcept(FE_DIVBYZERO);
-  show_fe_exceptions();
-
-  feclearexcept(FE_ALL_EXCEPT);
-  feraiseexcept(FE_OVERFLOW);
-  show_fe_exceptions();
-
-  feclearexcept(FE_ALL_EXCEPT);
-  feraiseexcept(FE_UNDERFLOW);
-  show_fe_exceptions();
-  
+  //~ /* Temporarily raise two other exceptions. */
   feclearexcept(FE_ALL_EXCEPT);
   feraiseexcept(FE_OVERFLOW | FE_INEXACT);
   show_fe_exceptions();
-
-	return 0;	
+   
+  //~ double s;
+  //  s = 1.0 / 0.0;  // FE_DIVBYZERO
+  //  s = 0.0 / 0.0;  // FE_INVALID
+  //  show_fe_exceptions();
+   
+  return 0;
 }

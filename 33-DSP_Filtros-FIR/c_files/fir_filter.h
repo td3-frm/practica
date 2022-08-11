@@ -18,6 +18,6 @@ typedef unsigned int uint32_t;
 
 void fir_online_float(float *input, float *output);
 void fir_offline_float(float *input, uint32_t N, float *output);
-void fir_filter_fixed(float *input, uint32_t N, float *output);
+void fir_online_fixed(float *input, uint32_t N, float *output);
 
 #endif
