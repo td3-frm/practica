@@ -19,13 +19,13 @@ int main(void)
 	s1 = (-8) >> 2;
 	s2 = (-1) >> 5;
 
+	printf("INT_MAX = %d \n" , INT_MAX);
+	printf("INT_MIN = %d \n" , INT_MIN);
+	
 	printf("c = %d \n", c );
 	printf("d = %d \n", d );
 	printf("s1 = %d \n", s1 );
 	printf("s2 = %d \n", s2 );
-	
-	printf("INT_MAX = %d \n" , INT_MAX);
-	printf("INT_MIN = %d \n" , INT_MIN);
 	
 	return 0;
 }
