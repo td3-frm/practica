@@ -1,5 +1,5 @@
 /*
- * Ejercicio 3 
+ * TP Procesos, Ejercicio 3 
 */
 #include <stdio.h>
 #include <stdlib.h>
