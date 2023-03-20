@@ -1,5 +1,5 @@
 /*
- * Ejercicio 2 de TP Procesos
+ * TP Procesos, Ejercicio 2 
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -11,7 +11,7 @@ int main (){
 	pid_t pid;
 	int i;
 
-	pid = fork();		
+	pid = fork();
 	printf ("Mi pid es %d y el pid de papa es %d. fork() devolvio %d\n", getpid(), getppid(), pid);
 
 	// Ejecute pstree en otra consola	
