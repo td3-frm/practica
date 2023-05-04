@@ -3,8 +3,10 @@
  * 
  * Comando para compilar:
  * 
- * 		gcc -m32 -c padre.c && gcc -m32 hijo.o padre.o -o padre
-
+ * 		gcc -c padre.c && gcc hijo.o padre.o -o padre
+ * 	
+ *	gcc -c padre.c # crea el objeto padre.o
+ *  gcc hijo.o padre.o -o padre # crea el ejectuble "padre" combinando los objetos hijo.o y padre.o
 */
 
 #include <stdio.h>

@@ -3,7 +3,7 @@
 
 3) Ambos archivos se compilan con el siguiente comando en consola: 
 
-$ gcc -m32 -c padre.c && gcc -m32 hijo.o padre.o -o padre
+$ gcc -c padre.c && gcc hijo.o padre.o -o padre
 
 4) El binario generado por el comando anterior se ejecuta en consola con: 
 
