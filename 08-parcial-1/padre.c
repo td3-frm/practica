@@ -3,10 +3,8 @@
  * 
  * Comando para compilar:
  * 
- * 		gcc -c padre.c && gcc hijo.o padre.o -o padre
- * 	
- *	gcc -c padre.c # crea el objeto padre.o
- *  gcc hijo.o padre.o -o padre # crea el ejectuble "padre" combinando los objetos hijo.o y padre.o
+ * 	gcc -c padre.c && gcc hijo.o padre.o -o padre
+
 */
 
 #include <stdio.h>
@@ -18,26 +16,19 @@
 #include <fcntl.h>
 #include <signal.h>
 
-int hijo (int fd[2], char * myfifo);
+#define MENSAJE "HOLA HIJA MIA"
+
+int hijo (int fd[2]);
 
 int main(void) 
 {
 	int fd[2];
 	int pid;
-	char tx_buffer[20] = {"HOLA HIJO MIO\0"};
-    char * myfifo = "/tmp/myfifo";
+	char tx_buffer[20] = MENSAJE;
 	
     if (pipe(fd) == -1)
     {
         perror("pipe");
-        return -1;
-    }
-    
-    unlink(myfifo); 
-    
-    if (mkfifo(myfifo, 0666) == -1)
-    {
-        perror("fifo");
         return -1;
     }
     
@@ -48,29 +39,24 @@ int main(void)
     }
     
 // codigo que ejecuta el hijo
-
 	if (pid==0) 
 	{ 
-        hijo(fd, myfifo);
+        hijo(fd);
 
         return 0;
     }
-
 // codigo que ejecuta el padre   
-
 	else
 	{
 		printf("Proceso Padre en ejecucion... \n"); 
 		
 		sleep(1);
 				
-		// **** ESCRIBIR CODIGO A PARTIR DE ESTA LINEA *****************
-		
+		// **** RESOLUCION DEL EJERCICIO *******************************
     
 		// *************************************************************
 		
-		wait(NULL);
-		
-		return 0;
+		wait(NULL);  
+		exit(0);
 	}
 }
