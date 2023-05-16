@@ -1,6 +1,5 @@
 /* Ejercicio 3 del TP de semaforos sin nombre */
 
-
 #include <stdio.h>
 #include <pthread.h>    
 #include <unistd.h>
