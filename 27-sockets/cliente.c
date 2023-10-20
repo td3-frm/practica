@@ -14,7 +14,7 @@ socket: Servidor:--> datos rx socket
 
 int main(int argc , char const * argv[])
 {
-   char buff_tcl[256], buff_sck[56];
+   char buff_tcl[256], buff_sck[256];
    struct sockaddr_in direccion={};
    int sockfd, lee_tcl, lee_sck, conn;
 

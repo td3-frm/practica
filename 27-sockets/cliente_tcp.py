@@ -14,5 +14,7 @@ client_socket.connect((host, port))
 mensaje = "Hola, servidor TCP"
 client_socket.send(mensaje.encode('utf-8'))
 
+print(f"Conexión saliente, mensaje: {mensaje}")
+
 # Cerrar la conexión con el servidor
 client_socket.close()
