@@ -8,6 +8,8 @@ os.chdir(script_dir)
 
 data = scipy.io.loadmat('Tchaikovsky.mat')
 
+print (f"data type: {type(data)}")
+print (f"signal first ten vaules: {data['signal'][0:10]}")
 print (f"signal shape: {data['signal'].shape}")
 print (f"Fs value: {data['Fs'][0]}")
 
