@@ -3,8 +3,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Parámetros del filtro
-orden = 6
-numtaps = 301  # Número de coeficientes
+orden = 4
+numtaps = 101  # Número de coeficientes
 fs = 44100  # Frecuencia de muestreo
 f1, f2 = 300, 3400  # Frecuencias de corte
 rp = 0.5  # Ripple en la banda de paso en dB
@@ -15,7 +15,7 @@ rs = 60   # Atenuación en la banda de rechazo en dB
 fir_coefs = signal.firwin(numtaps, [f1, f2], pass_zero=False, fs=fs)
 
 # Diseñar filtro IIR pasa-banda (Butterworth)
-iir_coefs = signal.iirfilter(orden, [f1, f2], btype='band', ftype='butter', fs=fs)
+iir_coefs = signal.iirfilter(orden, [f1, f2], rp=rp, rs=rs,  btype='band', ftype='ellip', fs=fs)
 
 # Respuesta en frecuencia de los filtros
 w_fir, h_fir = signal.freqz(fir_coefs, worN=2000, fs=fs)
@@ -49,3 +49,5 @@ plt.xlim(0, fs/2)
 # Mostrar gráficos
 plt.tight_layout()
 plt.show()
+
+dumb = 0
