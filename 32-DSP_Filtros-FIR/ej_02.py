@@ -1,9 +1,8 @@
+import os
 import numpy as np
 import matplotlib.pyplot as plt
 import math
-import numpy as np
 import scipy.io
-import os
 import sounddevice as sd
 
 from scipy.io import loadmat
