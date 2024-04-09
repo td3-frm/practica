@@ -12,8 +12,12 @@ int main (){
 	int i;
 
 	pid = fork();
-	printf ("Mi pid es %d y el pid de papa es %d. fork() devolvio %d\n", getpid(), getppid(), pid);
-
+	
+	if (pid == 0) 
+		printf ("Mi pid es %d y el pid de papa es %d. fork() devolvio %d\n", getpid(), getppid(), pid);
+	else
+		printf ("Mi pid es %d y el pid de papa es %d. fork() devolvio %d\n", getpid(), getppid(), pid);
+	
 	// Ejecute pstree en otra consola	
 	sleep(30); 
 
