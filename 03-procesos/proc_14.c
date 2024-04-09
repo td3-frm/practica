@@ -1,5 +1,5 @@
 /*
- * TP Procesos, Ejercicio 15
+ * Ejercicio 13 de TP Procesos
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -19,4 +19,9 @@ int main(void) {
 	exit(0);
 
 }
+
+
+
+
+
 	

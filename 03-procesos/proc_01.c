@@ -1,5 +1,5 @@
 /*
- * TP Procesos, Ejercicio 1
+ * Ejercicio 1 de TP Procesos
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -8,7 +8,7 @@
 
 int main (){
 	
-	printf ("Mi pid es %d y el pid de papa es %d\n", getpid(),getppid());
+	printf ("Proceso unico: Mi pid es %d y el pid de papa es %d\n", getpid(),getppid());
 
 	exit(0);   
-	}
+}

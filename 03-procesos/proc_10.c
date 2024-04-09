@@ -1,5 +1,5 @@
 /*
- * TP Procesos, Ejercicio 2 
+ * TP Procesos, Ejercicio 9
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -21,7 +21,7 @@ int main()
     } else if (pid == 0) { // proceso hijo
         printf("Proceso hijo  (PID=%d) está corriendo.\n", getpid());
         
-        sleep(1); 
+        sleep(5); 
         
         printf("Proceso hijo  (PID=%d) está saliendo.\n", getpid());
 
@@ -31,11 +31,11 @@ int main()
         
         printf("Proceso padre (PID=%d) está corriendo.\n", getpid());
         
-        sleep(10); 
+        sleep(15); 
                 
         printf("Proceso padre (PID=%d) está saliendo.\n", getpid());
         
-        //~ wait(NULL);
+        // wait(NULL);
     }
     
     return 0;
