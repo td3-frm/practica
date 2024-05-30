@@ -18,6 +18,7 @@ int main() {
    
    int err, leido;
    char buff[1024];   
+   // const char buff[1024];   
    mqd_t mqd; 
    struct mq_attr attr, attr_rcv;
   
@@ -34,7 +35,7 @@ int main() {
    printf("Cola de mensajes creada\n"); 
    
    // Escribe en cola de mensajes
-   err = mq_send(mqd, MENSAJE, strlen(MENSAJE)+1, 1);  //strlen nos da la longitud de una cadena
+   err = mq_send(mqd, MENSAJE, strlen(MENSAJE)+1, 0);  //strlen nos da la longitud de una cadena
    if(err == -1){
       printf ("error en mq_send()\n");
       exit(-1);    }
@@ -51,7 +52,7 @@ int main() {
    printf("Nros de mensajes pendientes en cola de mensajes: %ld\n", attr_rcv.mq_curmsgs);
 
    // Se lee de cola de mensajes
-   leido = mq_receive(mqd, buff, attr_rcv.mq_msgsize, 0);
+   leido = mq_receive(mqd, buff, attr_rcv.mq_msgsize, 0); 
    if (( leido < 0 )){
       printf ("error en mq_receive()\n");
       exit(-1); }
@@ -65,7 +66,7 @@ int main() {
       exit(-1);   }
 
       printf("Cola de mensajes cerrada (%d)\n", err);
-   
+/* 
    // Se elimina cola de mensajes
    err = mq_unlink(MQ_PATH);
    if(err == -1){
@@ -73,6 +74,6 @@ int main() {
       exit(-1);   }
 
       printf("Cola de mensajes eliminada (%d)\n", err);
-      
+ */    
    exit(0);
 }

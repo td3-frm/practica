@@ -14,8 +14,8 @@ pthread_mutex_t mtx=PTHREAD_MUTEX_INITIALIZER; // inicializacion estatica del mu
 
 void *HILO0(void *nro) {
 
-/* Variables Locales*/
-int numero;
+   /* Variables Locales*/
+   int numero;
 
 	numero= *(int*)nro;
 	
@@ -23,9 +23,10 @@ int numero;
    	if (s!=0){
       printf("ERROR; pthread_mutex() = %d\n", s);
       exit(-1);   }
-
+	
+	printf("Hilo 0, recibe nro=%d, total= %d\n",numero, total);	
    	total=total+numero;
-   	printf("Hilo 0, recibe nro=%d, total= %d\n",numero, total);
+   	// printf("Hilo 0, recibe nro=%d, total= %d\n",numero, total);
 
    	s=pthread_mutex_unlock(&mtx); 
    	if (s!=0){

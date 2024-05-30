@@ -21,7 +21,7 @@ sem_t sem;
 void *HILO(){
 int s;
 
-	sleep(3);
+	sleep(5);
 	
 	printf ("Soy el HILO voy a incrementar semaforo\n");
 
