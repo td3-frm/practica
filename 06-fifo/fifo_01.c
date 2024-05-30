@@ -59,9 +59,9 @@ int main(){
          if(leido < 1){
             write(STDOUT_FILENO, "Hijo, FIFO vacia\n", sizeof("Hijo, FIFO vacia\n"));
          }else {
-            write(STDOUT_FILENO, "Hijo, leido de la FIFO \"", sizeof("Hijo, leido de la FIFO \""));
+            write(STDOUT_FILENO, "Hijo, leido de la FIFO \n", sizeof("Hijo, leido de la FIFO \n"));
             write(STDOUT_FILENO, buff, leido-1);
-            write(STDOUT_FILENO, "\"\n", sizeof("\"\n"));
+            write(STDOUT_FILENO, "\n", sizeof("\n"));
          }
          close(fifo_d);
 
