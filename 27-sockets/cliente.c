@@ -14,7 +14,7 @@ socket: Servidor:--> datos rx socket
 
 int main(int argc , char const * argv[])
 {
-   char buff_tcl[256], buff_sck[256];
+   char buff_tcl[256], buff_sck[56];
    struct sockaddr_in direccion={};
    int sockfd, lee_tcl, lee_sck, conn;
 
@@ -62,7 +62,7 @@ int main(int argc , char const * argv[])
      write (STDOUT_FILENO, buff_sck, lee_sck);                  //escribe lo leido del socket
 
      if (( lee_tcl = read(STDIN_FILENO, buff_tcl, sizeof (buff_tcl))) > 0) {     // lee de teclado
-        write ( sockfd , buff_tcl, lee_tcl);                   //escribe en socket
+        write (sockfd , buff_tcl, lee_tcl);                   //escribe en socket
    }
  }
 //****************** 4 *******************//

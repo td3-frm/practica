@@ -53,8 +53,8 @@ int main(int argc, const char *argv[])      {
      rx_socket = recvfrom(SockEscucha, buffer_rx, sizeof (buffer_rx), 0,(struct sockaddr*)&struct_direccion,&len);            //recibe del socket 
 
      if (rx_socket>0) {
-        write ( STDOUT_FILENO , "cliente:--> ", 12);      //escribe leyenda en pantalla
-        write ( STDOUT_FILENO , buffer_rx, rx_socket);      //escribe lo leido del socket
+        write (STDOUT_FILENO , "cliente:--> ", 12);      //escribe leyenda en pantalla
+        write (STDOUT_FILENO , buffer_rx, rx_socket);      //escribe lo leido del socket
         sendto(SockEscucha, buffer_rx, rx_socket, 0, (struct sockaddr *) &struct_direccion, sizeof(struct_direccion)) ;                  //envia al socket lo que recibio
 
      }

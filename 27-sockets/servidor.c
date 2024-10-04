@@ -18,7 +18,7 @@ int SockEscucha,SockConexion;
 int main(int argc, const char *argv[])      {
 
    if (argc != 2){
-       argv[1]="2001"; } 
+       argv[1]="2000"; } 
 
 
  //****************** 1 *******************//
@@ -63,23 +63,21 @@ int main(int argc, const char *argv[])      {
    printf ("Paso 4: Bloqueo hasta que entre conexion accept()\n");
    cont=0;     
    SockConexion=accept(SockEscucha, NULL, 0) ;
-	
-	int pid =fork();
-	if (pid==0)
-	{
-	   if (SockConexion >=0) {  
-		  if (cont==0) {
-			   printf ("Desbloqueo de accept, entro conexion: %d\n",SockConexion);
-			   send (SockConexion ,"Bienvenido al servidor\n", 23,0 ); 
-		  cont=1;  }   
 
-		  while (( rx_socket = read(SockConexion, buffer_rx, sizeof (buffer_rx))) > 0) {  //lee del socket    
-				  write ( SockConexion ,buffer_rx, rx_socket);         //escribe en socket
-				  write ( STDOUT_FILENO , "cliente:--> ", 12);         //escribe leyenda en pantalla
-				  write ( STDOUT_FILENO , buffer_rx, rx_socket);      //escribe lo leido del socket
-		   }
-		} else { printf ("Error en la conexion\n");  }
-	}
+   if (SockConexion >=0) {  
+      if (cont==0) {
+           printf ("Desbloqueo de accept, entro conexion: %d\n",SockConexion);
+           send (SockConexion ,"Bienvenido al servidor\n", 23,0 ); 
+      cont=1;  }   
+
+          while (( rx_socket = read(SockConexion, buffer_rx, sizeof (buffer_rx))) > 0) {  //lee del socket    
+                  write (SockConexion ,buffer_rx, rx_socket);         //escribe en socket
+                  write (STDOUT_FILENO , "cliente:--> ", 12);         //escribe leyenda en pantalla
+                  write (STDOUT_FILENO , buffer_rx, rx_socket);      //escribe lo leido del socket
+          }
+    } else { 
+           printf ("Error en la conexion\n");  
+           }
  }
 
  //****************** 5 *******************//

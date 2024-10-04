@@ -56,8 +56,8 @@ int main(int argc , char const * argv[])
    //-- recibe datos del socket -- 
      int len=sizeof(direccion);
      lee_sck = recvfrom(sockfd, buff_sck, sizeof (buff_sck), 0,(struct sockaddr *) &direccion,&len);
-     write (STDOUT_FILENO, "Servidor:--> ", 13);               //escribe leyenda en pantalla
-     write (STDOUT_FILENO, buff_sck, lee_sck);        //escribe lo leido del socket
+     write(STDOUT_FILENO, "Servidor:--> ", 13);               //escribe leyenda en pantalla
+     write(STDOUT_FILENO, buff_sck, lee_sck);        //escribe lo leido del socket
 
   }
 
