@@ -1,0 +1,16 @@
+# Requirements for Sensor REST API Project
+# Python 3.8+
+
+# Server dependencies
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+pydantic==2.5.0
+
+# Client dependencies
+requests==2.31.0
+
+# Optional: Development and testing
+# pytest==7.4.3
+# httpx==0.25.1
+# black==23.11.0
+# flake8==6.1.0
